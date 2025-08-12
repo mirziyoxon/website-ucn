@@ -1,0 +1,110 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9; /* Almost white background */
+  color: #333;
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+/* Navbar */
+.navbar {
+  background: #eeeeee; /* Light gray */
+  color: #555; /* Dark gray text */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+}
+
+.navbar a {
+  color: #555; /* Dark gray */
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  color: #333; /* Slightly darker on hover */
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Research list */
+.research-list {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.research-list h1 {
+  margin-bottom: 15px;
+  color: #444;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.research-item {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  background: #fff;
+}
+
+.research-item a {
+  color: #666;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.research-item a:hover {
+  color: #333;
+}
+
+.research-item p {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Floating dots */
+.dots {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: rgba(0, 0, 0, 0.05); /* Very light gray */
+  border-radius: 50%;
+  animation: float 8s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+    opacity: 0;
+  }
+}
