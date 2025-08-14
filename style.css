@@ -235,3 +235,7 @@ body {
   50% { background-position: 200px 200px, 250px 250px, 300px 300px, 100% 50%; }
   100% { background-position: 0 0, 50px 50px, 100px 100px, 0% 50%; }
 }
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
