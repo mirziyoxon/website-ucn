@@ -3,11 +3,11 @@ const posts = [
   {
     title: "How Small Habits Change Your Life",
     description: "Big results come from small daily improvements. Here's why.",
-    content: "ø"
+    content: "Ã¸"
   },
   {
     title: "Why Simplicity Wins",
-    description: "In design, business, and life — less is often more.",
+    description: "In design, business, and life â€” less is often more.",
     content: "Simplicity removes distractions. It forces you to focus on what matters most..."
   },
   {
@@ -57,3 +57,9 @@ menuBtn.addEventListener("click", () => {
 
 // Init blog posts
 showPosts();
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('show');
+  });
+});
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
