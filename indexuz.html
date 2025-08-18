@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Unicorner Times</title>
+  <link rel="stylesheet" href="style.css" />
+
+
+</head>
+
+
+<body>
+
+<!-- Popup -->
+<div class="overlay" id="popupOverlay">
+  <div class="popup">
+    <h2>Bildirishnoma</h2>
+    <p>Biz endi sizni ro'yxatdan o'tishni tavsiya qilmaymiz. Maxsus post muallifi sifatida biz jamoat ochiq manbasiga hissa qo'shamiz.</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-left">
+  <a href="indexuz.html" class="logo">The Unicorner Times</a>
+</div>
+
+<style>
+.logo {
+  font-family: "Brush Script MT", cursive;
+  font-size: 28px;
+  color: #333;
+  text-decoration: none;
+}
+.logo:hover {
+  color: #ff6600; /* hover color */
+}
+</style>
+
+    <div class="nav-right" id="nav-links">
+      <a href="#">Asosiy</a>
+<a href="#">Biz haqimizda</a>
+<a href="books.html">Kitoblar</a>
+      <a href="research.html">Tadqiqotlar</a>
+ <a href="scholar.html">Maqolalar</a>
+      <a href="publish.html">Chop etish</a>
+    </div>
+    <div class="menu-btn" id="menu-btn">
+      &#9776; <!-- Hamburger icon -->
+    </div>
+  </nav>
+
+  <!-- Header / Hero -->
+  <header class="hero">
+    <h1 class="hero-title">The&ndash;UCN&ndash;Timesga xush kelibsiz</h1>
+    <p class="hero-subtitle">Fikrlar, hikoyalar va maqolalarni baham ko'ring - bir vaqtning o'zida, bitta postda.</p>
+    <form class="subscribe-form">
+      <input type="email" placeholder="Elektron pochta manzilingizni kiriting" required />
+      <button type="submit">Davom etish</button>
+    </form>
+  </header>
+
+
+  <main class="blog-container" id="blog-container"></main>
+
+  <script src="script.js"></script>
+
+  <!-- Blog Section -->
+  <div id="blog-container"></div>
+
+
+
+  <footer class="footer">
+    <p>&copy; 2025 Barcha huquqlar himoyalangan </p>
+  </footer>
+
+  <script src="script.js"></script>
+
+<script>
+  // Show popup when page loads
+  window.addEventListener('load', function() {
+    document.getElementById("popupOverlay").style.display = "flex";
+  });
+
+  function closePopup() {
+    document.getElementById("popupOverlay").style.display = "none";
+  }
+</script>
+
+
+</body>
+</html>
