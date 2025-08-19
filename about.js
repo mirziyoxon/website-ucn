@@ -122,11 +122,11 @@ window.addEventListener("resize", function () {
   init();
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        document.getElementById("splash").style.display = "none";
-        document.getElementById("content").style.display = "block";
-      }, 1500); // 1.2 second
-    });
+
+setTimeout(() => {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("content").style.display = "flex";
+}, 2000); //  2,5 seconds
+
 
 
