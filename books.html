@@ -108,12 +108,12 @@ li {
   </div>
 </main>
 
-<script>document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        document.getElementById("splash").style.display = "none";
-        document.getElementById("content").style.display = "block";
-      }, 3000); // 3 second
-    });
+<script>
+  setTimeout(() => {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("content").style.display = "flex";
+}, 2000); //  2 seconds
+
 
   function requestCode() {
   const userCode = prompt("Enter access code to unlock more books:");
@@ -131,6 +131,7 @@ li {
 
 </body>
 </html>
+
 
 
 
