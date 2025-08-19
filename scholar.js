@@ -58,10 +58,4 @@ window.addEventListener('resize', ()=>{
   canvas.height = window.innerHeight;
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        document.getElementById("splash").style.display = "none";
-        document.getElementById("content").style.display = "block";
-      }, 2000); // 2 second
-    });
 
