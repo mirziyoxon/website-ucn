@@ -126,5 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => {
         document.getElementById("splash").style.display = "none";
         document.getElementById("content").style.display = "block";
-      }, 2000); // 2 second
+      }, 1200); // 1.2 second
     });
+
