@@ -25,10 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        document.getElementById("splash").style.display = "none";
-        document.getElementById("content").style.display = "block";
-      }, 2500); // 2.5 second
-    });
+
+setTimeout(() => {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("content").style.display = "flex";
+}, 2000); //  2,5 seconds
 
