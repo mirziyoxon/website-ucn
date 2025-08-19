@@ -8,7 +8,8 @@
 </head>
 <body>
 <div id="splash">Loading...</div>
-  <style>/* Splash screen style */
+  <style>
+    /* Splash screen style */
     #splash {
       position: fixed;
       top: 0;
@@ -27,7 +28,8 @@
     /* Main content hidden at first */
     #content {
       display: none;
-    }</style>
+    }
+  </style>
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-left">
@@ -65,8 +67,17 @@
 
 
   <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        document.getElementById("splash").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      }, 1000); // 1 second
+    });
+  </script>
 </body>
 </html>
+
 
 
 
