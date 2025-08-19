@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Unicorner Times</title>
   <link rel="stylesheet" href="style.css" />
-
-
+  
 </head>
-
-
+  
 <body>
-
+<div id="splash">Loading...</div>
 <!-- Popup -->
 <div class="overlay" id="popupOverlay">
   <div class="popup">
@@ -38,6 +36,26 @@
 .logo:hover {
   color: #ff6600; /* hover color */
 }
+  /* Splash screen style */
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      z-index: 1000;
+    }
+
+    /* Main content hidden at first */
+    #content {
+      display: none;
+    }
 </style>
 
     <div class="nav-right" id="nav-links">
@@ -90,11 +108,18 @@
   function closePopup() {
     document.getElementById("popupOverlay").style.display = "none";
   }
+  document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(() => {
+        document.getElementById("splash").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      }, 3000); // 3 second
+    });
 </script>
 
 
 </body>
 </html>
+
 
 
 
