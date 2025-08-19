@@ -7,7 +7,27 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="splash">Loading...</div>
+  <style>/* Splash screen style */
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      z-index: 1000;
+    }
 
+    /* Main content hidden at first */
+    #content {
+      display: none;
+    }</style>
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-left">
@@ -47,5 +67,6 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
