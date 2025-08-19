@@ -1,4 +1,4 @@
-m<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -54,44 +54,51 @@ m<!DOCTYPE html>
     <button onclick="unlock()">Unlock</button>
     <p id="error" style="color:red;"></p>
   </div>
+
+  <!-- Content -->
   <div id="content">
-  <div id="viewer"></div>
+    <div id="viewer"></div>
+  </div>
 
   <!-- Load PDF.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script>
-    const url = "premium/onwritingwell.pdf"; // ?? your folder path
+    const url = "premium/onwritingwell.pdf"; // your PDF path
 
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
 
-    const viewer = document.getElementById("viewer");
+    function loadPDF() {
+      const viewer = document.getElementById("viewer");
+      viewer.innerHTML = ""; // clear old content if any
 
-    pdfjsLib.getDocument(url).promise.then(pdf => {
-      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-        pdf.getPage(pageNum).then(page => {
-          const viewport = page.getViewport({ scale: 1.2 });
-          const canvas = document.createElement("canvas");
-          const context = canvas.getContext("2d");
-          canvas.height = viewport.height;
-          canvas.width = viewport.width;
-          viewer.appendChild(canvas);
+      pdfjsLib.getDocument(url).promise.then(pdf => {
+        for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+          pdf.getPage(pageNum).then(page => {
+            const viewport = page.getViewport({ scale: 1.2 });
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            viewer.appendChild(canvas);
 
-          page.render({ canvasContext: context, viewport: viewport });
-        });
-      }
-    }).catch(err => {
-      viewer.innerHTML = `<p style="color:red">? Could not load PDF. Check the file path: ${url}</p>`;
-      console.error(err);
-    });
+            page.render({ canvasContext: context, viewport: viewport });
+          });
+        }
+      }).catch(err => {
+        viewer.innerHTML = `<p style="color:red">❌ Could not load PDF. Check file path: ${url}</p>`;
+        console.error(err);
+      });
+    }
 
     function unlock() {
-      const correctCode = "2220"; // <-- change this to your secret code
+      const correctCode = "2220"; // secret code
       const input = document.getElementById("codeInput").value;
 
       if (input === correctCode) {
         document.getElementById("locker").style.display = "none";
         document.getElementById("content").style.display = "block";
+        loadPDF(); // load PDF only after unlock
       } else {
         document.getElementById("error").textContent = "Incorrect code. Try again.";
       }
@@ -99,6 +106,7 @@ m<!DOCTYPE html>
   </script>
 </body>
 </html>
+
 
 
 
