@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+TYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -46,33 +46,87 @@
     a:hover {
       color: #0073e6;
     }
+
+    #locker {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    #content {
+      display: none;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+    }
+    button {
+      padding: 8px 12px;
+      font-size: 16px;
+      background: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #444;
+    }
   </style>
-    <header>
-  <nav>
-<div class="nav-right" id="nav-links">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-<a href="bookme.html" class="active">Books</a>
-<a href="research.html">Research</a>
-<a href="scholar.html">Articles</a>
-    <a href="publish.html">Publish</a>
-    
-</div>
-<div class="menu-btn" id="menu-btn"</div>
-  </nav>
-</header>
+</head>
 
-<h1>Books Page</h1>
+<body>
 
-  <div class="container">
-    <h1>Available Books</h1>
-    <ul>
-      <li><a href="articles/dubai.pdf" target="_blank">Book 1: Introduction to Economics</a></li>
-      <li><a href="bookme/book2.pdf" target="_blank">Book 2: Small Habits, Big Change</a></li>
-      <li><a href="bookme/book3.pdf" target="_blank">Book 3: Future of Technology</a></li>
-      <li><a href="bookme/book4.pdf" target="_blank">Book 4: Creative Thinking</a></li>
-    </ul>
+  <!-- Locker Screen -->
+  <div id="locker">
+    <h2>Enter Access Code</h2>
+    <input type="password" id="codeInput" placeholder="Enter code">
+    <button onclick="unlock()">Unlock</button>
+    <p id="error" style="color:red;"></p>
   </div>
+
+  <!-- Hidden Content -->
+  <div id="content">
+    <header>
+      <nav>
+        <div class="nav-right" id="nav-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="bookme.html" class="active">Books</a>
+          <a href="research.html">Research</a>
+          <a href="scholar.html">Articles</a>
+          <a href="publish.html">Publish</a>
+        </div>
+      </nav>
+    </header>
+
+    <h1>Books Page</h1>
+
+    <div class="container">
+      <h1>Available Books</h1>
+      <ul>
+        <li><a href="articles/dubai.pdf" target="_blank">Book 1: Introduction to Economics</a></li>
+        <li><a href="bookme/book2.pdf" target="_blank">Book 2: Small Habits, Big Change</a></li>
+        <li><a href="bookme/book3.pdf" target="_blank">Book 3: Future of Technology</a></li>
+        <li><a href="bookme/book4.pdf" target="_blank">Book 4: Creative Thinking</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function unlock() {
+      const correctCode = "2220"; // <-- change this to your secret code
+      const input = document.getElementById("codeInput").value;
+
+      if (input === correctCode) {
+        document.getElementById("locker").style.display = "none";
+        document.getElementById("content").style.display = "block";
+      } else {
+        document.getElementById("error").textContent = "Incorrect code. Try again.";
+      }
+    }
+  </script>
 
 </body>
 </html>
