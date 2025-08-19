@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Reader (PDF.js)</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f5f5f5;
+    }
+    #viewer {
+      padding: 20px;
+      background: white;
+    }
+    canvas {
+      display: block;
+      margin: 10px auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="viewer"></div>
+
+  <!-- Load PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script>
+    const url = "articles/article1.pdf"; // ?? your folder path
+
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+
+    const viewer = document.getElementById("viewer");
+
+    pdfjsLib.getDocument(url).promise.then(pdf => {
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        pdf.getPage(pageNum).then(page => {
+          const viewport = page.getViewport({ scale: 1.2 });
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+          viewer.appendChild(canvas);
+
+          page.render({ canvasContext: context, viewport: viewport });
+        });
+      }
+    }).catch(err => {
+      viewer.innerHTML = `<p style="color:red">? Could not load PDF. Check the file path: ${url}</p>`;
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
