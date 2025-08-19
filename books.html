@@ -92,12 +92,17 @@ li {
   <h1>All Books</h1>
   <div class="container">
     
-    <ul>
+    <ul id="bookList">
       <li><a href="books/Atomic Habits -  unicorner.uz.pdf" target="_blank">Book 1: Atomic Habits - James Clear</a></li>
       <li><a href="books/bell-alexander-graham - unicorner.uz.pdf" target="_blank">Book 2: Alexander Graham Bell - Harodl S. Osborne</a></li>
       <li><a href="books/History Of English Literature (2000) - unicorner.uz.pdf" target="_blank">Book 3: History Of English Literature (2000) - Edward Albert</a></li>
       <li><a href="books/Homes Odyssey - unicorner.uz.pdf" target="_blank">Book 4: Homes Odyssey - Ian Johnston</a></li>
-    </ul>
+      <!-- Hidden books -->
+    <li class="extra-book" style="display:none;"><a href="bookme/book5.pdf" target="_blank">Book 5: Advanced Science</a></li>
+    <li class="extra-book" style="display:none;"><a href="bookme/book6.pdf" target="_blank">Book 6: Leadership Skills</a></li>
+    <li class="extra-book" style="display:none;"><a href="bookme/book7.pdf" target="_blank">Book 7: Business Growth</a></li>
+     </ul>
+    <button id="moreBtn" onclick="requestCode()">More Books</button>
   </div>
 </main>
 
@@ -107,10 +112,24 @@ li {
         document.getElementById("content").style.display = "block";
       }, 3000); // 3 second
     });
+
+  function requestCode() {
+  const userCode = prompt("Enter access code to unlock more books:");
+  const correctCode = "12345"; // <-- Change this to your own code
+
+  if (userCode === correctCode) {
+    const hiddenBooks = document.querySelectorAll(".extra-book");
+    hiddenBooks.forEach(book => book.style.display = "list-item");
+    document.getElementById("moreBtn").style.display = "none"; // hide button after success
+  } else if (userCode !== null) {
+    alert("Incorrect code. Try again.");
+  }
+}
 </script>
 
 </body>
 </html>
+
 
 
 
