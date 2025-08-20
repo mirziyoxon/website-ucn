@@ -1,136 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Unicorner Times</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="png" href="photo_2025-03-14_04-25-25.png" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ultimate Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-  
 <body>
-<div id="splash">
-  <div class="loader"></div>
-</div>
-<!-- Popup -->
-<div class="overlay" id="popupOverlay">
-  <div class="popup">
-    <h2>Notice</h2>
-    <p>We no longer encourage you to sign up/sign in. As a loyal open-source, we contribute community workshop.</p>
-    <button onclick="closePopup()">OK</button>
-  </div>
-</div>
+  <div class="container">
+    <h1>Ultimate Tic-Tac-Toe</h1>
 
-
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-left">
-  <a href="index.html" class="logo">The Unicorner Times</a>
-</div>
-
-<style>
-.logo {
-  font-family: "Brush Script MT", cursive;
-  font-size: 28px;
-  color: #333;
-  text-decoration: none;
-}
-.logo:hover {
-  color: #ff6600; /* hover color */
-}
-  /* Splash screen style */
-    #splash {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      font-weight: bold;
-      z-index: 1000;
-    }
-
-    /* Main content hidden at first */
-    #content {
-      display: none;
-    }
-</style>
-
-    <div class="nav-right" id="nav-links">
-      <a href="#" class="active">Home</a>
-<a href="about.html">About</a>
-<a href="books.html">Books</a>
-      <a href="research.html">Research</a>
-      <a href="scholar.html">Articles</a>
-      <a href="publish.html">Publish</a>
-      
-<a href="index.html">EN</a>
-  <a href="indexuz.html">UZ</a>
-      
+    <div class="options">
+      <label>
+        Game Mode: 
+        <select id="mode">
+          <option value="1p">1 Player</option>
+          <option value="2p">2 Players</option>
+        </select>
+      </label>
+      <label id="difficulty-label">
+        Difficulty: 
+        <select id="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard" selected>Hard</option>
+        </select>
+      </label>
     </div>
-    <div class="menu-btn" id="menu-btn">
-      &#9776; <!-- Hamburger icon -->
-  
-  </nav>
 
-  <!-- Header / Hero -->
-  <header class="hero">
-    <h1 class="hero-title">Welcome to  The&ndash;UCN&ndash;Times</h1>
-    <p class="hero-subtitle">Sharing ideas, stories, and thoughts &ndash; one post at a time.</p>
-    <form class="subscribe-form">
-      <input type="email" placeholder="Enter your email" required />
-      <button type="submit">Proceed</button>
-    </form>
-  </header>
+    <div id="game">
+      <div class="cell" data-index="0"></div>
+      <div class="cell" data-index="1"></div>
+      <div class="cell" data-index="2"></div>
+      <div class="cell" data-index="3"></div>
+      <div class="cell" data-index="4"></div>
+      <div class="cell" data-index="5"></div>
+      <div class="cell" data-index="6"></div>
+      <div class="cell" data-index="7"></div>
+      <div class="cell" data-index="8"></div>
+    </div>
 
-  <main class="blog-container" id="blog-container"></main>
-
+    <div class="info">
+      <p id="message">Your turn: X</p>
+      <button id="restart">Restart Game</button>
+    </div>
+  </div>
   <script src="script.js"></script>
-
-  <!-- Blog Section -->
-  <main class="blog-container" id="blog-container">
-    <!-- Posts will be injected by JS -->
-  </main>
-
-  <footer class="footer">
-    <p>&copy; 2025 All Rights Reserved </p>
-  </footer>
-
-  <script src="script.js"></script>
-
-<script>
-  // Show popup when page loads
-  window.addEventListener('load', function() {
-    document.getElementById("popupOverlay").style.display = "flex";
-  });
-
-  function closePopup() {
-    document.getElementById("popupOverlay").style.display = "none";
-  }
-</script>
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
