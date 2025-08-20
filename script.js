@@ -1,165 +1,59 @@
-const cells = document.querySelectorAll('.cell');
-const message = document.getElementById('message');
-const restartBtn = document.getElementById('restart');
-const modeSelect = document.getElementById('mode');
-const difficultySelect = document.getElementById('difficulty');
-const difficultyLabel = document.getElementById('difficulty-label');
+// Sample posts (replace with your own)
+const posts = [
+  {
+    title: "How Small Habits Change Your Life",
+    description: "Big results come from small daily improvements. Here's why.",
+    content: "ø"
+  },
+  {
+    title: "Why Simplicity Wins",
+    description: "In design, business, and life — less is often more.",
+    content: "Simplicity removes distractions. It forces you to focus on what matters most..."
+  },
+  {
+    title: "The Power of Consistency",
+    description: "Consistency beats intensity in the long run.",
+    content: "Anyone can do something once. The real change comes from doing it repeatedly..."
+  }
+  const container = document.getElementById("blog-container");
 
-let board = ["","","","","","","","",""];
-let player = "X"; 
-let computer = "O";
-let currentPlayer = "X"; 
-let gameOver = false;
-let mode = '1p'; 
-let difficulty = 'hard';
-
-const winningCombinations = [
-  [0,1,2],[3,4,5],[6,7,8],
-  [0,3,6],[1,4,7],[2,5,8],
-  [0,4,8],[2,4,6]
-];
-
-modeSelect.addEventListener('change', () => {
-  mode = modeSelect.value;
-  difficultyLabel.style.display = mode === '1p' ? 'inline' : 'none';
-  restartGame();
+// Show all posts
+function showPosts() {
+  container.innerHTML = "";
+  posts.forEach((post, i) => {
+    const div = document.createElement("div");
+    div.className = "post";
+    div.innerHTML = `<h2>${post.title}</h2><p>${post.description}</p>`;
+    div.addEventListener("click", () => showPost(i));
+    container.appendChild(div);
+     });
+}
+// Init
+showPosts();
+// Existing blog post script...
+// (keep your posts array, showPosts, showPost functions here)
+// MENU TOGGLE
+const menuBtn = document.getElementById("menu-btn");
+const navLinks = document.getElementById("nav-links");
+menuBtn.addEventListener("click", () => {
+  navLinks.classList.toggle("show");
 });
-
-difficultySelect.addEventListener('change', () => {
-  difficulty = difficultySelect.value;
+// Init blog posts
+showPosts();
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('show');
+     });
 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-function checkWinner(b, p) {
-  return winningCombinations.some(combo => combo.every(i => b[i] === p));
-}
-
-function checkDraw(b) {
-  return b.every(cell => cell !== "");
-}
-
-function highlightWinner(p) {
-  winningCombinations.forEach(combo => {
-    if(combo.every(i => board[i] === p)){
-      combo.forEach(i => cells[i].classList.add('winning-cell'));
-    }
-  });
-}
-
-function minimax(newBoard, isMaximizing) {
-  if(checkWinner(newBoard, computer)) return {score: 1};
-  if(checkWinner(newBoard, player)) return {score: -1};
-  if(checkDraw(newBoard)) return {score: 0};
-
-  let moves = [];
-  newBoard.forEach((cell, i) => {
-    if(cell === ""){
-      let move = {};
-      move.index = i;
-      newBoard[i] = isMaximizing ? computer : player;
-      let result = minimax(newBoard, !isMaximizing);
-      move.score = result.score;
-      newBoard[i] = "";
-      moves.push(move);
-    }
-  });
-
-  let bestMove;
-  if(isMaximizing){
-    let bestScore = -Infinity;
-    moves.forEach(m => { if(m.score > bestScore){ bestScore = m.score; bestMove = m; }});
-  } else {
-    let bestScore = Infinity;
-    moves.forEach(m => { if(m.score < bestScore){ bestScore = m.score; bestMove = m; }});
-  }
-  return bestMove;
-}
-
-function computerMoveAI() {
-  let index;
-  const available = board.map((v,i) => v === "" ? i : null).filter(v=>v!==null);
-  
-  if(difficulty === 'easy') {
-    index = available[Math.floor(Math.random() * available.length)];
-  } else if(difficulty === 'medium') {
-    index = Math.random() < 0.5 ? 
-      available[Math.floor(Math.random() * available.length)] : 
-      minimax([...board], true).index;
-  } else {
-    index = minimax([...board], true).index;
-  }
-
-  board[index] = computer;
-  cells[index].textContent = computer;
-
-  if(checkWinner(board, computer)){
-    message.textContent = "Computer Wins!";
-    highlightWinner(computer);
-    gameOver = true;
-    return;
-  }
-  if(checkDraw(board)){
-    message.textContent = "It's a Draw!";
-    gameOver = true;
-    return;
-  }
-  message.textContent = "Your turn: X";
-}
-
-cells.forEach(cell => {
-  cell.addEventListener('click', () => {
-    const index = cell.getAttribute('data-index');
-    if(board[index] !== "" || gameOver) return;
-
-    if(mode === '1p'){
-      board[index] = player;
-      cell.textContent = player;
-
-      if(checkWinner(board, player)){
-        message.textContent = "You Win!";
-        highlightWinner(player);
-        gameOver = true;
-        return;
-      }
-      if(checkDraw(board)){
-        message.textContent = "It's a Draw!";
-        gameOver = true;
-        return;
-      }
-      message.textContent = "Computer is thinking...";
-      setTimeout(computerMoveAI, 500);
-
-    } else {
-      // 2-player mode
-      board[index] = currentPlayer;
-      cell.textContent = currentPlayer;
-
-      if(checkWinner(board, currentPlayer)){
-        message.textContent = `${currentPlayer} Wins!`;
-        highlightWinner(currentPlayer);
-        gameOver = true;
-        return;
-      }
-      if(checkDraw(board)){
-        message.textContent = "It's a Draw!";
-        gameOver = true;
-        return;
-      }
-
-      currentPlayer = currentPlayer === "X" ? "O" : "X";
-      message.textContent = `${currentPlayer}'s turn`;
-    }
-  });
-});
-
-function restartGame() {
-  board = ["","","","","","","","",""];
-  cells.forEach(cell => {
-    cell.textContent = "";
-    cell.classList.remove('winning-cell');
-  });
-  gameOver = false;
-  currentPlayer = "X";
-  message.textContent = mode === '1p' ? "Your turn: X" : "X's turn";
-}
-
-restartBtn.addEventListener('click', restartGame);
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(link.getAttribute('href')).scrollIntoView({
+      behavior: 'smooth'
+    });
+    setTimeout(() => {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("content").style.display = "flex";
+}, 3000); //  3 seconds
