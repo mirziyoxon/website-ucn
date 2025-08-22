@@ -63,19 +63,20 @@
   <script>
   // Show popup when page loads
   window.addEventListener('load', function() {
+    // Hide splash after page loads
+    document.getElementById("splash").style.display = "none";
+
+    // Show popup
     document.getElementById("popupOverlay").style.display = "flex";
   });
 
   function closePopup() {
     document.getElementById("popupOverlay").style.display = "none";
   }
-    window.addEventListener("load", function() {
-  document.getElementById("splash").style.display = "none";
-  document.getElementById("content").style.display = "block";
-});
 
 </script>
 </body>
 </html>
+
 
 
