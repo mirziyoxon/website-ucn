@@ -15,6 +15,7 @@ const posts = [
     description: "Consistency beats intensity in the long run.",
     content: "Anyone can do something once. The real change comes from doing it repeatedly..."
   }
+  ];
   const container = document.getElementById("blog-container");
 
 // Show all posts
@@ -57,3 +58,4 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   document.getElementById("splash").style.display = "none";
   document.getElementById("content").style.display = "flex";
 }, 3000); //  3 seconds
+
