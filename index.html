@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "bc5a71df-3816-4ff9-8c80-cac8966b23d5",
+    });
+  });
+</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Unicorner Times</title>
@@ -61,6 +70,8 @@
   
   <script src="script.js"></script>
   <script>
+    importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
+
   // Show popup when page loads
   window.addEventListener('load', function() {
     // Hide splash after page loads
@@ -77,6 +88,7 @@
 </script>
 </body>
 </html>
+
 
 
 
