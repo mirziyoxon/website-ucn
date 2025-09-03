@@ -33,12 +33,6 @@ function showPosts() {
 showPosts();
 // Existing blog post script...
 // (keep your posts array, showPosts, showPost functions here)
-// MENU TOGGLE
-const menuBtn = document.getElementById("menu-btn");
-const navLinks = document.getElementById("nav-links");
-menuBtn.addEventListener("click", () => {
-  navLinks.classList.toggle("show");
-});
 // Init blog posts
 showPosts();
 const observer = new IntersectionObserver(entries => {
@@ -55,4 +49,5 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
       behavior: 'smooth'
     });
    
+
 
