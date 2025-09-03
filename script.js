@@ -15,8 +15,9 @@ const posts = [
     description: "Consistency beats intensity in the long run.",
     content: "Anyone can do something once. The real change comes from doing it repeatedly..."
   }
-  ];
-  const container = document.getElementById("blog-container");
+];
+
+const container = document.getElementById("blog-container");
 
 // Show all posts
 function showPosts() {
@@ -27,20 +28,21 @@ function showPosts() {
     div.innerHTML = `<h2>${post.title}</h2><p>${post.description}</p>`;
     div.addEventListener("click", () => showPost(i));
     container.appendChild(div);
-     });
+  });
 }
+
 // Init
 showPosts();
-// Existing blog post script...
-// (keep your posts array, showPosts, showPost functions here)
-// Init blog posts
-showPosts();
+
+// Fade-in observer
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) entry.target.classList.add('show');
-     });
+  });
 });
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
@@ -49,3 +51,4 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     });
   });
 });
+
