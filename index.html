@@ -87,17 +87,17 @@
   function closePopup() {
     document.getElementById("popupOverlay").style.display = "none";
   }
-    document.addEventListener("DOMContentLoaded", () => {
-  const menuBtn = document.getElementById("menu-btn");
+    const menuBtn = document.getElementById("menu-btn");
   const navLinks = document.getElementById("nav-links");
 
-  menuBtn.addEventListener("click", () => {
+  menuBtn.onclick = () => {
     navLinks.classList.toggle("show");
-  });
-});
+    console.log("Menu toggled"); // Debugging
+  };
 </script>
 </body>
 </html>
+
 
 
 
