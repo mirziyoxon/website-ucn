@@ -70,6 +70,10 @@
   
   <script src="script.js"></script>
   <script>
+     setTimeout(() => {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("content").style.display = "flex";
+}, 2000); //  2 seconds
     importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
 
   // Show popup when page loads
@@ -84,10 +88,10 @@
   function closePopup() {
     document.getElementById("popupOverlay").style.display = "none";
   }
-
 </script>
 </body>
 </html>
+
 
 
 
