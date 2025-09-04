@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - The Unicorner Times</title>
+  <style>
+    /* --- General Styles --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Arial", sans-serif;
+      background: #fff;
+      color: #222;
+      overflow-x: hidden;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* --- Navbar --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      background: #fff;
+      z-index: 1000;
+    }
+    .logo {
+      font-family: "Brush Script MT", cursive;
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+    }
+    .nav-right {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-right a {
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .nav-right a:hover {
+      color: #ff6600;
+    }
+    .menu-btn {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    /* Mobile menu */
+    @media (max-width: 768px) {
+      .nav-right {
+        display: none;
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        right: 20px;
+        top: 60px;
+        padding: 10px 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .nav-right.show {
+        display: flex;
+      }
+      .menu-btn {
+        display: block;
+      }
+    }
+
+    /* --- Hero --- */
+    .hero {
+      text-align: center;
+      padding: 70px 20px;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* --- About Sections --- */
+    .section {
+      max-width: 1000px;
+      margin: 50px auto;
+      padding: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 30px;
+    }
+    .section img {
+      flex: 1 1 300px;
+      max-width: 400px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+    .section-content {
+      flex: 1 1 400px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+    .section-content h2 {
+      margin-bottom: 10px;
+      font-size: 1.8rem;
+    }
+    .section-content p {
+      color: #555;
+      line-height: 1.6;
+    }
+    .visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #fafafa;
+      font-size: 0.9rem;
+      color: #777;
+      margin-top: 50px;
+    }
+
+    /* --- Animations --- */
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="/" class="logo">The Unicorner Times</a>
+    <div class="nav-right" id="nav-links">
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/research/">Research</a>
+      <a href="/article/">Articles</a>
+      <a href="/publish/">Publish</a>
+    </div>
+    <div class="menu-btn" id="menu-btn">&#9776;</div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>About The Unicorner Times</h1>
+    <p>We are an open-source platform for sharing research, articles, and creative works. Our mission is to empower voices and ideas through accessible publishing.</p>
+  </section>
+
+  <!-- Sections -->
+  <section class="section">
+    <img src="https://via.placeholder.com/400x250" alt="Community">
+    <div class="section-content">
+      <h2>Our Community</h2>
+      <p>We believe in the power of collaboration. The Unicorner Times is built by students, researchers, and writers across the globe who contribute knowledge and creativity.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-content">
+      <h2>Our Mission</h2>
+      <p>Our mission is to provide a free and accessible platform for sharing ideas, research, and stories. We aim to democratize access to information and empower creators everywhere.</p>
+    </div>
+    <img src="https://via.placeholder.com/400x250" alt="Mission">
+  </section>
+
+  <section class="section">
+    <img src="https://via.placeholder.com/400x250" alt="Innovation">
+    <div class="section-content">
+      <h2>Innovation & Growth</h2>
+      <p>We embrace technology to make publishing seamless and engaging. With advanced tools, animations, and modern UI, we bring ideas to life in a user-friendly way.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 The Unicorner Times. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById("menu-btn");
+    const navLinks = document.getElementById("nav-links");
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    // Scroll animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll(".section img, .section-content").forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
