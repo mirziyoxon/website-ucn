@@ -51,29 +51,46 @@
     .nav-right a:hover {
       color: #ff6600;
     }
+
+    /* Hamburger button */
     .menu-btn {
       display: none;
-      font-size: 1.8rem;
+      flex-direction: column;
+      gap: 5px;
       cursor: pointer;
     }
+    .menu-btn span {
+      width: 25px;
+      height: 3px;
+      background: #333;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
 
-    /* Mobile menu */
+    /* Mobile menu as sidebar */
     @media (max-width: 768px) {
-      .nav-right {
-        display: none;
-        flex-direction: column;
-        background: #fff;
-        position: absolute;
-        right: 20px;
-        top: 60px;
-        padding: 10px 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      }
-      .nav-right.show {
+      .menu-btn {
         display: flex;
       }
-      .menu-btn {
-        display: block;
+      .nav-right {
+        position: fixed;
+        top: 0;
+        left: -250px; /* hidden by default */
+        width: 200px;
+        height: 100%;
+        background: #fff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        flex-direction: column;
+        padding: 60px 20px;
+        transition: left 0.3s ease;
+        z-index: 999;
+      }
+      .nav-right.show {
+        left: 0; /* slide in */
+      }
+      .nav-right a {
+        margin: 10px 0;
+        font-size: 1.1rem;
       }
     }
 
@@ -153,6 +170,11 @@
   <!-- Navbar -->
   <nav class="navbar">
     <a href="/" class="logo">The Unicorner Times</a>
+    <div class="menu-btn" id="menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <div class="nav-right" id="nav-links">
       <a href="https://unicorner.uz">Home</a>
       <a href="https://book.unicorner.uz">Books</a>
@@ -160,7 +182,6 @@
       <a href="https://article.unicorner.uz">Articles</a>
       <a href="https://publish.unicorner.uz">Publish</a>
     </div>
-    <div class="menu-btn" id="menu-btn">&#9776;</div>
   </nav>
 
   <!-- Hero -->
@@ -220,6 +241,7 @@
   </script>
 </body>
 </html>
+
 
 
 
