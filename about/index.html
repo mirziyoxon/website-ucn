@@ -164,6 +164,85 @@
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
     }
+
+
+    /* Team Members */
+#team {
+  padding: 50px 0;
+  text-align: center;
+  background: #f4f4f4;
+}
+
+#team h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.carousel {
+  position: relative;
+  max-width: 400px;
+  margin: auto;
+}
+
+.slides {
+  display: flex;
+  overflow: hidden;
+}
+
+.member {
+  min-width: 100%;
+  transition: 0.5s;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.member img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+/* Tugmalar */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  padding: 16px;
+  color: #333;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 50%;
+  background: #ddd;
+}
+
+.next { right: -50px; }
+.prev { left: -50px; }
+
+.prev:hover, .next:hover {
+  background: #666;
+  color: white;
+}
+
+/* Nuqtalar */
+.dots {
+  text-align: center;
+  margin-top: 15px;
+}
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+}
+.active {
+  background-color: #333;
+}
   </style>
 </head>
 <body>
@@ -215,6 +294,47 @@
     </div>
   </section>
 
+
+  <!-- Team Members -->
+  <section id="team">
+    <h2>Our Team</h2>
+
+    <div class="carousel">
+
+      <div class="slides">
+        <div class="member">
+          <img src="pics/community.jpg" alt="Member 1">
+          <h3>John Doe</h3>
+          <p>Founder</p>
+        </div>
+
+        <div class="member">
+          <img src="pics/innovation.jpg" alt="Member 2">
+          <h3>Jane Smith</h3>
+          <p>Editor</p>
+        </div>
+
+        <div class="member">
+          <img src="pics/mission.jpg" alt="Member 3">
+          <h3>Ali Akbar</h3>
+          <p>Designer</p>
+        </div>
+      </div>
+
+      <!-- Tugmalar -->
+      <a class="prev">&#10094;</a>
+      <a class="next">&#10095;</a>
+
+      <!-- Nuqtalar -->
+      <div class="dots">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+      </div>
+    </div>
+  </section>
+
+  
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 The Unicorner Times. All rights reserved.</p>
@@ -238,9 +358,43 @@
     }, { threshold: 0.2 });
 
     document.querySelectorAll(".section img, .section-content").forEach(el => observer.observe(el));
+
+
+    // Team Members Carousel
+let slideIndex = 0;
+let slides = document.querySelectorAll(".member");
+let dots = document.querySelectorAll(".dot");
+showSlides(slideIndex);
+
+// Chap / o‘ng tugmalar
+document.querySelector(".prev").onclick = () => showSlides(slideIndex -= 1);
+document.querySelector(".next").onclick = () => showSlides(slideIndex += 1);
+
+// Hozirgi slayd
+function currentSlide(n) {
+  showSlides(slideIndex = n-1);
+}
+
+// Slaydlarni ko‘rsatish
+function showSlides(n) {
+  if (n >= slides.length) {slideIndex = 0}
+  if (n < 0) {slideIndex = slides.length - 1}
+
+  slides.forEach((slide) => slide.style.display = "none");
+  dots.forEach((dot) => dot.classList.remove("active"));
+
+  slides[slideIndex].style.display = "block";
+  dots[slideIndex].classList.add("active");
+}
+
+// Avtomatik slayd
+setInterval(() => {
+  showSlides(slideIndex += 1);
+}, 3000);
   </script>
 </body>
 </html>
+
 
 
 
