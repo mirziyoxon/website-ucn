@@ -54,7 +54,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 
 
-<script>
+
 var modal = document.getElementById("promoModal");
 var span = document.getElementsByClassName("close")[0];
 
@@ -74,4 +74,5 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-</script>
+
+
