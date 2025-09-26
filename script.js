@@ -52,3 +52,26 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 
+
+
+<script>
+var modal = document.getElementById("promoModal");
+var span = document.getElementsByClassName("close")[0];
+
+// Sahifa yuklanganda ko‘rsat
+window.onload = function() {
+  modal.style.display = "block";
+}
+
+// Yopish tugmasi bosilganda
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// Fon bosilganda ham yopilsin
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
