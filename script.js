@@ -3,17 +3,17 @@ const posts = [
   {
     title: "How Small Habits Change Your Life",
     description: "Big results come from small daily improvements. Here's why.",
-    content: "ø"
+    content: "Small habits are powerful because they build lasting change quietly. When you start with something small—like drinking more water, reading a few pages a day, or walking for ten minutes—you set the stage for bigger results. These actions may not feel significant at first, but over time they add up through consistency. The real magic is in the compounding effect: small efforts, repeated daily, grow into remarkable progress. They also shape your identity—every time you practice a habit, you reinforce the belief that you are the type of person who takes care of your health, learns, or stays disciplined. Slowly, one habit leads to another, creating a ripple effect across your life. In the end, it’s not one big change but many small, steady steps that transform us the most."
   },
   {
     title: "Why Simplicity Wins",
     description: "In design, business, and life — less is often more.",
-    content: "Simplicity removes distractions. It forces you to focus on what matters most..."
+    content: "Simplicity is powerful because it removes the unnecessary and directs our focus to what truly matters. Complex plans, cluttered spaces, and overthinking create stress and confusion. Simplicity cuts through the noise, bringing clarity and ease. A simple design communicates better, a simple plan is easier to follow, and a simple life leaves room for what is essential. Choosing simplicity doesn’t mean having less—it means making space for more of what brings value, joy, and impact. In the end, simplicity turns effort into effectiveness and chaos into calm."
   },
   {
     title: "The Power of Consistency",
     description: "Consistency beats intensity in the long run.",
-    content: "Anyone can do something once. The real change comes from doing it repeatedly..."
+    content: "Consistency is the bridge between goals and results. It’s not about working the hardest once, but about showing up again and again, even when progress feels slow. Small actions, repeated daily, create momentum and compound into lasting success. Whether it’s exercising, studying, or building a business, consistency builds trust—with yourself and with others—because it proves reliability. It also strengthens discipline: the more you repeat a habit, the easier it becomes. Great achievements rarely come from sudden bursts of effort; they come from steady, repeated steps taken over time. Consistency turns effort into growth, and growth into transformation."
   }
 ];
 
@@ -64,4 +64,5 @@ function showPost(i) {
     </div>
   `;
 }
+
 
