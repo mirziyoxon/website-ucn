@@ -14,7 +14,7 @@
 </head>
 <body>
  
-   <!-- Fullscreen Banner -->
+   <!-- Desktop Fullscreen Promo Modal -->
 <div id="promoModal">
   <span class="close">&times;</span>
   <img src="pics/reklama3.jpg" alt="Promo Banner">
@@ -96,33 +96,35 @@
   };
 
 
-     const modal = document.getElementById("promoModal");
-  const closeBtn = document.querySelector("#promoModal .close");
+     
+window.addEventListener("load", () => {
+  const modal = document.getElementById("promoModal");
+  const closeBtn = modal.querySelector(".close");
 
-  // Yopish funksiyasi
   function closeBanner() {
-    modal.style.display = "none";
-    localStorage.setItem("bannerShownTime", Date.now()); // vaqtni saqlash
+    modal.classList.remove("show");
+    setTimeout(() => modal.style.display = "none", 300); // fade out
+    localStorage.setItem("bannerShownTime", Date.now());
   }
 
-  // Sahifa yuklanganda
-  window.addEventListener("load", () => {
-    const lastShown = localStorage.getItem("bannerShownTime");
-    const now = Date.now();
-    const oneHour = 60 * 60 * 1000; // 1 soat millisekundlarda
-
-    if (!lastShown || now - lastShown > oneHour) {
-      modal.style.display = "flex"; // banner ochiladi
-    }
-  });
-
-  // Tugma bosilganda yopish
+  // "X" tugmasi bosilganda modalni yopish
   closeBtn.onclick = closeBanner;
 
+  // 1 soatdan keyin yana ko‘rsatish logikasi
+  const lastShown = localStorage.getItem("bannerShownTime");
+  const now = Date.now();
+  const oneHour = 60 * 60 * 1000;
+
+  if (!lastShown || now - lastShown > oneHour) {
+    modal.style.display = "flex";
+    setTimeout(() => modal.classList.add("show"), 10); // fade in
+  }
+});
      
 </script>
 </body>
 </html>
+
 
 
 
