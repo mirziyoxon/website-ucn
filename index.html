@@ -16,6 +16,14 @@
  <div id="splash">
   <div class="loader"></div>
 </div>
+
+   <!-- Fullscreen Banner -->
+<div id="promoModal">
+  <span class="close">&times;</span>
+  <img src="images/reklama3.jpg" alt="Promo Banner">
+</div>
+
+   
 <div class="overlay" id="popupOverlay">
   <div class="popup">
     <h2>Notice</h2>
@@ -89,9 +97,36 @@
     navLinks.classList.toggle("show");
     console.log("Menu toggled"); // Debugging
   };
+
+
+     const modal = document.getElementById("promoModal");
+  const closeBtn = document.querySelector("#promoModal .close");
+
+  // Yopish funksiyasi
+  function closeBanner() {
+    modal.style.display = "none";
+    localStorage.setItem("bannerShownTime", Date.now()); // vaqtni saqlash
+  }
+
+  // Sahifa yuklanganda
+  window.addEventListener("load", () => {
+    const lastShown = localStorage.getItem("bannerShownTime");
+    const now = Date.now();
+    const oneHour = 60 * 60 * 1000; // 1 soat millisekundlarda
+
+    if (!lastShown || now - lastShown > oneHour) {
+      modal.style.display = "flex"; // banner ochiladi
+    }
+  });
+
+  // Tugma bosilganda yopish
+  closeBtn.onclick = closeBanner;
+
+     
 </script>
 </body>
 </html>
+
 
 
 
