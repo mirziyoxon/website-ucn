@@ -51,3 +51,17 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     });
   });
 });
+
+
+// Show single post (full view)
+function showPost(i) {
+  const post = posts[i];
+  container.innerHTML = `
+    <div class="post">
+      <h2>${post.title}</h2>
+      <p>${post.content}</p>
+      <button onclick="showPosts()">← Back</button>
+    </div>
+  `;
+}
+
