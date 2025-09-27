@@ -292,3 +292,39 @@ h1 {
     #content {
       display: none;
     }
+
+
+/* To‘liq ekran fon */
+#promoModal {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Rasm */
+#promoModal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}
+
+/* Yopish tugmasi */
+#promoModal .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+#promoModal .close:hover {
+  color: red;
+}
