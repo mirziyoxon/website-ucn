@@ -1,6 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (() => {
+  // O'zingiz ruxsat bermoqchi bo'lgan davlatlar (ISO 2-harf kodlari)
+  const allowedCountries = ['UZ', 'KG', 'KZ']; // misol: O'zbekiston, Qirg'iziston, Qozog'iston
+
+  // Geo API (bepul/limitli — o'zgartiring agar sizda API kaliti bo'lsa)
+  const GEO_API = 'https://ipapi.co/json/';
+
+  // Dastlab sahifa ko'rinishini yashiramiz — flashni oldini olish uchun
+  try { document.documentElement.style.visibility = 'hidden'; } catch(e){}
+
+  // Ko'rsatish uchun fallback vaqt (ms)
+  const FALLBACK_SHOW_MS = 4000;
+
+  // Deny sahifasi HTML (o'zgartiring)
+  const DENIED_HTML = `
+    <div style="height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;font-family:Arial,Helvetica,sans-serif;text-align:center;padding:24px;">
+      <h1 style="margin:0 0 12px 0;">Uzr — sayt sizning davlatingizda mavjud emas</h1>
+      <p style="margin:0 0 18px 0;">Agar siz admin bo'lsangiz yoki bu xato deb o'ylasangiz, VPN yoki qo'llab-quvvatlash bilan bog'laning.</p>
+      <button id="gc_retry" style="padding:10px 14px;border-radius:6px;border:0;background:#0d6efd;color:#fff;cursor:pointer;">Qayta tekshirish</button>
+    </div>
+  `;
+
+  // Foydalanuvchiga sahifani ko'rsatish
+  function showPage() {
+    document.documentElement.style.visibility = '';
+  }
+
+  // Deny qilish
+  function deny(msg) {
+    document.documentElement.innerHTML = DENIED_HTML;
+    // Retry tugmasi
+    const b = document.getElementById('gc_retry');
+    if(b) b.addEventListener('click', () => {
+      // qayta yuklash va yana tekshirish
+      location.reload();
+    });
+  }
+
+  // Asosiy tekshiruv
+  (async () => {
+    // Local / dev hostlarga ruxsat (agar xohlasangiz true qoldiring)
+    if(location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:') {
+      showPage();
+      return;
+    }
+
+    // Geo API so'rovi
+    let timedOut = false;
+    const timeoutId = setTimeout(() => { timedOut = true; showPage(); }, FALLBACK_SHOW_MS);
+
+    try {
+      const res = await fetch(GEO_API, { cache: 'no-store' });
+      clearTimeout(timeoutId);
+      if(!res.ok) {
+        // API javob bermasa: xavfsizlik uchun DENY qilamiz (xohlasangiz showPage() qilavering)
+        deny('Geolocation xizmatiga ulanib bo‘lmadi.');
+        return;
+      }
+      const data = await res.json();
+      // ipapi bilan ishlaganda country yoki country_code bo'lishi mumkin
+      const iso = (data.country || data.country_code || '').toString().toUpperCase();
+
+      if(allowedCountries.includes(iso)){
+        showPage();
+      } else {
+        deny('Sizning davlatingizga ruxsat yo‘q.');
+      }
+    } catch (err) {
+      clearTimeout(timeoutId);
+      // Xatolik bo'lsa — xavfsizlik uchun deny (agar istasangiz showPage() qilib qo'ying)
+      console.error('Geo check error', err);
+      deny('Geo tekshiruvida xato.');
+    }
+  })();
+})();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About - The Unicorner Times</title>
@@ -394,6 +471,7 @@ setInterval(() => {
   </script>
 </body>
 </html>
+
 
 
 
