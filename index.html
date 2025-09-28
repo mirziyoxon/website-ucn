@@ -5,13 +5,13 @@
   <script>
 (function(){
   const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const platform = navigator.platform || '';
 
-  // Mobil qurilma aniqlash (Safari iPad/iPhone bilan ham)
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)
-                   || /iPad|iPhone|iPod/.test(navigator.platform);
+  const isMobile = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)
+                   || /iPhone|iPod/i.test(platform)
+                   || (platform === 'iPad' || (/MacIntel/.test(platform) && navigator.maxTouchPoints > 1));
 
   if(isMobile){
-    // mobil saytga yo'naltirish
     window.location.replace("https://mob.unicorner.uz");
   }
 })();
@@ -75,6 +75,7 @@
   </script>
 </body>
 </html>
+
 
 
 
