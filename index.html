@@ -4,13 +4,18 @@
   <!-- Mobile Redirect -->
   <script>
 (function(){
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+  // Mobil qurilma aniqlash (Safari iPad/iPhone bilan ham)
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)
+                   || /iPad|iPhone|iPod/.test(navigator.platform);
+
   if(isMobile){
-    window.location.href = "https://mob.unicorner.uz";
+    // mobil saytga yo'naltirish
+    window.location.replace("https://mob.unicorner.uz");
   }
 })();
 </script>
-
   <meta name="description" content="Unicorner is a hub for innovation, startups, and collaboration in Uzbekistan.">
   <meta name="keywords" content="unicorn, unicorner, startup, innovation, uzbekistan, hub, times, news">
   <meta charset="UTF-8" />
@@ -70,6 +75,7 @@
   </script>
 </body>
 </html>
+
 
 
 
