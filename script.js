@@ -66,3 +66,50 @@ function showPost(i) {
 }
 
 
+
+
+
+
+<script>
+const FREEZE_KEY = 'unicorner_freeze';
+const now = new Date().getTime();
+
+// localStorage dan holatni olish
+let freezeData = JSON.parse(localStorage.getItem(FREEZE_KEY));
+
+if(freezeData){
+  const freezeEnd = freezeData.freezeEnd;
+  const freezeDone = freezeData.freezeDone;
+
+  if(freezeDone && now < freezeEnd){
+    // Sayt muzlatilgan
+    document.body.innerHTML = `<h1 style="text-align:center;margin-top:20%;">Under Maintenance. Come back at ${new Date(freezeEnd).toLocaleTimeString()}</h1>`;
+  } else if(freezeDone && now >= freezeEnd && !freezeData.secondRun){
+    // 10 daqiqa ishlashga ruxsat
+    const workEnd = now + 10*60*1000;
+    freezeData.secondRun = true;
+    freezeData.freezeEnd = workEnd;
+    localStorage.setItem(FREEZE_KEY, JSON.stringify(freezeData));
+    alert("You can work for 10 minutes!");
+    
+    // 10 daqiqa tugagach yana 1 soatga muzlatish
+    setTimeout(() => {
+      freezeData.freezeEnd = new Date().getTime() + 60*60*1000;
+      localStorage.setItem(FREEZE_KEY, JSON.stringify(freezeData));
+      location.reload();
+    }, 10*60*1000);
+
+  } else {
+    // Ishlash davom etadi
+  }
+
+} else {
+  // Foydalanuvchi birinchi marta kirdi
+  const freezeStart = now + 1*60*1000; // 1 daqiqa ishlash
+  freezeData = { freezeStart: freezeStart, freezeEnd: freezeStart + 60*60*1000, freezeDone: true, secondRun: false };
+  localStorage.setItem(FREEZE_KEY, JSON.stringify(freezeData));
+
+  // 1 daqiqa ishlashdan keyin reload
+  setTimeout(() => location.reload(), 60*1000);
+}
+</script>
