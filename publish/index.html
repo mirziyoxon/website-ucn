@@ -93,11 +93,11 @@
       padding: 15px;
       border-radius: 8px;
     }
+    .nav-right.mobile.show {
+      display: flex;
+    }
     .nav-right.mobile a {
       margin: 10px 0;
-    }
-    .nav-right.show {
-      display: flex;
     }
     @media (max-width: 768px) {
       .nav-right {
@@ -184,13 +184,12 @@
           <span></span>
           <span></span>
         </div>
-        <div class="nav-right" id="navLinks">
+        <div class="nav-right mobile" id="navLinks">
           <a href="https://unicorner.uz">Home</a>
           <a href="https://unicorner.uz/about.html">About</a>
           <a href="https://book.unicorner.uz">Books</a>
           <a href="https://research.unicorner.uz">Research</a>
           <a href="https://article.unicorner.uz">Articles</a>
-          
         </div>
       </nav>
     </header>
@@ -242,9 +241,10 @@
 
     // Hamburger menu toggle
     document.getElementById("hamburger").addEventListener("click", () => {
-      document.getElementById("navLinks").classList.toggle("show");
-      document.getElementById("navLinks").classList.toggle("mobile");
+      const nav = document.getElementById("navLinks");
+      nav.classList.toggle("show");
     });
   </script>
 </body>
 </html>
+
