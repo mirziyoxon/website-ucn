@@ -250,25 +250,46 @@
 
 
 
-    <!-- BLOCKER START -->
-<style>
-  #uc-block-overlay {
-    position: fixed;
-    inset: 0;
-    background: #ffffff;
-    z-index: 2147483647;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 24px;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    color: #222;
-  }
-  #uc-block-overlay.hidden { display: none; }
-  #uc-block-overlay .msg { font-size: 18px; line-height:1.4; opacity:0.95; }
-  html.uc-blocked, body.uc-blocked { overflow: hidden !important; height: 100% !important; }
+    .partners-marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 20px 0;
+}
+
+.marquee-track {
+  display: inline-flex;
+  gap: 60px;
+  align-items: center;
+  animation: marquee 25s linear infinite;
+}
+
+.marquee-track img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(0%);
+  transition: transform 0.3s ease;
+}
+
+.marquee-track img:hover {
+  transform: scale(1.1);
+}
+
+/* Oddiy yurish */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* 2-qator uchun teskari */
+.partners-marquee.reverse .marquee-track {
+  animation: marquee-reverse 25s linear infinite;
+}
+
+@keyframes marquee-reverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
   </style>
 </head>
 <body>
@@ -360,7 +381,43 @@
     </div>
   </section>
 
-  
+  <!-- Partners -->
+<section id="partners" style="padding:50px 0;background:#fff;">
+  <!-- 1-qator -->
+  <div class="partners-marquee">
+    <div class="marquee-track">
+      <img src="pics/partner1.png" alt="Partner 1">
+      <img src="pics/partner2.png" alt="Partner 2">
+      <img src="pics/partner3.png" alt="Partner 3">
+      <img src="pics/partner4.png" alt="Partner 4">
+      <img src="pics/partner5.png" alt="Partner 5">
+      <!-- takrorlash -->
+      <img src="pics/partner1.png" alt="Partner 1">
+      <img src="pics/partner2.png" alt="Partner 2">
+      <img src="pics/partner3.png" alt="Partner 3">
+      <img src="pics/partner4.png" alt="Partner 4">
+      <img src="pics/partner5.png" alt="Partner 5">
+    </div>
+  </div>
+
+  <!-- 2-qator -->
+  <div class="partners-marquee reverse">
+    <div class="marquee-track">
+      <img src="pics/partner6.png" alt="Partner 6">
+      <img src="pics/partner7.png" alt="Partner 7">
+      <img src="pics/partner8.png" alt="Partner 8">
+      <img src="pics/partner9.png" alt="Partner 9">
+      <img src="pics/partner10.png" alt="Partner 10">
+      <!-- takrorlash -->
+      <img src="pics/partner6.png" alt="Partner 6">
+      <img src="pics/partner7.png" alt="Partner 7">
+      <img src="pics/partner8.png" alt="Partner 8">
+      <img src="pics/partner9.png" alt="Partner 9">
+      <img src="pics/partner10.png" alt="Partner 10">
+    </div>
+  </div>
+</section>
+
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 The Unicorner Times. All rights reserved.</p>
@@ -534,4 +591,5 @@ setInterval(() => {
   </script>
 </body>
 </html>
+
 
