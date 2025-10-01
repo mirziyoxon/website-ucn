@@ -253,18 +253,17 @@
     .partners-marquee {
   overflow: hidden;
   white-space: nowrap;
-  margin: 20px 0;
 }
 
 .marquee-track {
   display: inline-flex;
-  gap: 60px;
+  gap: 80px;
   align-items: center;
-  animation: marquee 25s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 .marquee-track img {
-  height: 50px;
+  height: 100px; /* logolar balandligi */
   width: auto;
   object-fit: contain;
   filter: grayscale(0%);
@@ -272,23 +271,13 @@
 }
 
 .marquee-track img:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
 }
 
-/* Oddiy yurish */
+/* cheksiz oqishi */
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
-}
-
-/* 2-qator uchun teskari */
-.partners-marquee.reverse .marquee-track {
-  animation: marquee-reverse 25s linear infinite;
-}
-
-@keyframes marquee-reverse {
-  0%   { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
 }
   </style>
 </head>
@@ -381,42 +370,25 @@
     </div>
   </section>
 
-  <!-- Partners -->
+<!-- Partners -->
 <section id="partners" style="padding:50px 0;background:#fff;">
-  <!-- 1-qator -->
   <div class="partners-marquee">
     <div class="marquee-track">
-      <img src="partners/partner4.jpg" alt="Partner 6">
-      <img src="partners/partner3.jpg" alt="Partner 7">
-      <img src="partners/partner2.jpg" alt="Partner 8">
-      <img src="partners/partner1.png" alt="Partner 9">
-      <img src="partners/partnerfinrdlab.png" alt="Partner 10">
-      <!-- takrorlash -->
-      <img src="partners/partner4.jpg" alt="Partner 6">
-      <img src="partners/partner3.jpg" alt="Partner 7">
-      <img src="partners/partner2.jpg" alt="Partner 8">
-      <img src="partners/partner1.png" alt="Partner 9">
-      <img src="partners/partnerfinrdlab.png" alt="Partner 10">
-    </div>
-  </div>
-
-  <!-- 2-qator -->
-  <div class="partners-marquee reverse">
-    <div class="marquee-track">
-      <img src="partners/partner4.jpg" alt="Partner 6">
-      <img src="partners/partner3.jpg" alt="Partner 7">
-      <img src="partners/partner2.jpg" alt="Partner 8">
-      <img src="partners/partner1.png" alt="Partner 9">
-      <img src="partners/partnerfinrdlab.png" alt="Partner 10">
-      <!-- takrorlash -->
-      <img src="partners/partner4.jpg" alt="Partner 6">
-      <img src="partners/partner3.jpg" alt="Partner 7">
-      <img src="partners/partner2.jpg" alt="Partner 8">
-      <img src="partners/partner1.png" alt="Partner 9">
-      <img src="partners/partnerfinrdlab.png" alt="Partner 10">
+      <img src="pics/partner1.png" alt="Partner 1">
+      <img src="pics/partner2.png" alt="Partner 2">
+      <img src="pics/partner3.png" alt="Partner 3">
+      <img src="pics/partner4.png" alt="Partner 4">
+      <img src="pics/partner5.png" alt="Partner 5">
+      <!-- qayta qo'shilyapti cheksiz oqishi uchun -->
+      <img src="pics/partner1.png" alt="Partner 1">
+      <img src="pics/partner2.png" alt="Partner 2">
+      <img src="pics/partner3.png" alt="Partner 3">
+      <img src="pics/partner4.png" alt="Partner 4">
+      <img src="pics/partner5.png" alt="Partner 5">
     </div>
   </div>
 </section>
+
 
   <!-- Footer -->
   <footer>
@@ -591,6 +563,7 @@ setInterval(() => {
   </script>
 </body>
 </html>
+
 
 
 
