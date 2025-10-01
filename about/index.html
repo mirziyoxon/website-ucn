@@ -455,119 +455,13 @@ setInterval(() => {
 
 
 
-
-
-
-
-
-
-
-
-    (function(){
-  const STORAGE_KEY = 'unicorner_blocked_until';
-
-  function nowMs(){ return Date.now(); }
-  function getBlockedUntil(){
-    const v = localStorage.getItem(STORAGE_KEY);
-    return v ? Number(v) : 0;
-  }
-  function setBlockedUntil(ms){
-    localStorage.setItem(STORAGE_KEY, String(ms));
-  }
-  function isCurrentlyBlocked(){
-    const until = getBlockedUntil();
-    return until && nowMs() < until;
-  }
-
-  // Random 1–99 kun
-  function randomDays() {
-    return Math.floor(Math.random() * 99) + 1; // 1..99
-  }
-  // Har bir triggerda yangi random muddat
-  function computeNewBlockOnTrigger(){
-    const n = nowMs();
-    const days = randomDays();
-    return n + days * 24*60*60*1000;
-  }
-
-  function applyOverlay(){
-    document.documentElement.classList.add('uc-blocked');
-    document.body.classList.add('uc-blocked');
-    let ov = document.getElementById('uc-block-overlay');
-    if (!ov) {
-      ov = document.createElement('div');
-      ov.id = 'uc-block-overlay';
-      ov.className = 'hidden';
-      ov.innerHTML = '<div class="msg">🚫 Ushbu sahifa vaqtincha yopilgan.</div>';
-      document.documentElement.appendChild(ov);
-    }
-    ov.classList.remove('hidden');
-  }
-
-  function hideOverlay(){
-    const ov = document.getElementById('uc-block-overlay');
-    if (ov) ov.classList.add('hidden');
-    document.documentElement.classList.remove('uc-blocked');
-    document.body.classList.remove('uc-blocked');
-  }
-
-  function blockNowAndPersist(){
-    const newUntil = computeNewBlockOnTrigger();
-    setBlockedUntil(newUntil);
-    applyOverlay();
-  }
-
-  if (isCurrentlyBlocked()){
-    applyOverlay();
-  } else {
-    hideOverlay();
-  }
-
-  let lastTriggerTs = 0;
-  function maybeTriggerBlock(){
-    const ts = nowMs();
-    if (ts - lastTriggerTs < 1000) return;
-    lastTriggerTs = ts;
-    blockNowAndPersist();
-  }
-
-  document.addEventListener('keydown', (e)=>{
-    if (e.key === 'PrintScreen' || e.keyCode === 44) {
-      maybeTriggerBlock();
-    }
-  }, true);
-
-  document.addEventListener('visibilitychange', ()=>{
-    if (document.visibilityState === 'hidden') {
-      maybeTriggerBlock();
-    }
-  });
-
-  document.addEventListener('paste', (e)=>{
-    try {
-      const items = (e.clipboardData && e.clipboardData.items) ? e.clipboardData.items : [];
-      for (let i=0; i<items.length; i++){
-        const it = items[i];
-        if (it && it.type && it.type.indexOf('image') === 0){
-          maybeTriggerBlock();
-          break;
-        }
-      }
-    } catch(err){}
-  });
-
-  setInterval(function(){
-    if (isCurrentlyBlocked()){
-      applyOverlay();
-    } else {
-      hideOverlay();
-      localStorage.removeItem(STORAGE_KEY);
-    }
-  }, 30*1000);
-})();
+    // Logolarni cheksiz oqishi uchun dublikat qilish
+  const logos = document.querySelector(".logos");
+  logos.innerHTML += logos.innerHTML; 
   </script>
 </body>
 </html>
+
 
 
 
