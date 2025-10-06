@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Download Unicorner App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    h1 { color: #222; }
+    p { color: #555; }
+  </style>
+  <script>
+    window.onload = function() {
+      var userAgent = navigator.userAgent.toLowerCase();
+      var isAndroid = userAgent.indexOf("android") > -1;
+      var isIOS = /iphone|ipad|ipod/.test(userAgent);
+      var isMobile = /mobile|android|iphone|ipad|ipod/.test(userAgent);
+
+      if (isAndroid) {
+        // Android > avtomatik yuklab olish
+        window.location.href = "https://github.com/mirziyoxon/websiteooo/releases/download/v1.0.0/unicorner.apk";
+      } else if (isIOS) {
+        // iPhone/iPad > topilmadi
+        document.getElementById("message").innerHTML = "? Not FOUND";
+      } else if (!isMobile) {
+        // Kompyuter > boshqa xabar
+        document.getElementById("message").innerHTML = "?? Please open this page from your Android phone.";
+      } else {
+        // Boshqa qurilmalar (masalan unknown OS)
+        document.getElementById("message").innerHTML = "? Not FOUND";
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="box">
+    <h1 id="message">? Checking your device...</h1>
+    <p>If you are on Android, the app will start downloading automatically.</p>
+  </div>
+</body>
+</html>
