@@ -1,8 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Bosh sahifa (eng muhim sahifa) -->
   <url>
     <loc>https://unicorner.uz/</loc>
     <lastmod>2025-10-06</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.00</priority>
   </url>
+
+  <!-- Maqolalar bo'limi -->
+  <url>
+    <loc>https://article.unicorner.uz/</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Kitoblar bo'limi -->
+  <url>
+    <loc>https://book.unicorner.uz/</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- G'oyalar bo'limi -->
+  <url>
+    <loc>https://research.unicorner.uz/</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Biz haqimizda sahifasi -->
+  <url>
+    <loc>https://unicorner.uz/about</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+
+  <!-- Aloqa sahifasi -->
+  <url>
+    <loc>https://unicorner.uz/publish</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.45</priority>
+  </url>
+
 </urlset>
