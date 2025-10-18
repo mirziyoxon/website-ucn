@@ -1,36 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <script src="https://cdn.counter.dev/script.js" data-id="2bd8482e-fdd4-490b-aa13-72b92d89a41e" data-utcoffset="5"></script>
+  <script src="https://cdn.counter.dev/script.js" data-id="2bd8482e-fdd4-490b-aa13-72b92d89a41e" data-utcoffset="5"></script>
+
   <!-- Mobile Redirect -->
   <script>
-(function() {
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      const platform = navigator.platform || '';
+  (function() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const platform = navigator.platform || '';
+    const isMobile =
+      /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) ||
+      /iPhone|iPod/i.test(platform) ||
+      (platform === 'iPad' || (/MacIntel/.test(platform) && navigator.maxTouchPoints > 1));
 
-      const isMobile =
-        /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) ||
-        /iPhone|iPod/i.test(platform) ||
-        (platform === 'iPad' || (/MacIntel/.test(platform) && navigator.maxTouchPoints > 1));
+    if (isMobile) window.location.replace("https://mob.unicorner.uz");
+  })();
+  </script>
 
-      if (isMobile) {
-        // Redirect all mobile users
-        window.location.replace("https://mob.unicorner.uz");
-      } else {
-        // Redirect desktop/laptop users
-        window.location.replace("https://hrefx!fix.unicorner.uz");
-      }
-    })();
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Unicorner – Startup & Innovation Time</title>
- <title>Unicorner.uz — Ilmiy ishlar, maqolalar va biznes g‘oyalar</title>
-<meta name="description" content="Unicorner.uz — An open source to find research papers, articles, business ideas, books va startup insightlar.">
-<meta name="keywords" content="ucn times, article, youth, hub, startup, research, open source, knowledge sharing, Unicorner, Unicorner times, toshkent times">
-  <link rel="stylesheet" href="style.css" />
+  <title>Unicorner – Startup & Innovation Time</title>
+  <meta name="description" content="Unicorner.uz — An open source to find research papers, articles, business ideas, books va startup insightlar.">
+  <meta name="keywords" content="ucn times, article, youth, hub, startup, research, open source, knowledge sharing, Unicorner, Unicorner times, toshkent times">
   <link rel="icon" type="image/png" href="photo_2025-03-14_04-25-25.png" />
+
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      margin: 0;
+      background: #fff;
+      color: #222;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      background-color: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      animation: fadeDown 0.7s ease forwards;
+    }
+    .logo {
+      font-size: 1.4rem;
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      font-family: "Brush Script MT", cursive;
+      transition: color 0.3s;
+    }
+    .logo:hover { color: #ff6600; }
+
+    .nav-right {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-right a {
+      text-decoration: none;
+      color: black;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .nav-right a:hover {
+      color: #ff6600;
+    }
+
+    .menu-btn { display: none; font-size: 1.8rem; cursor: pointer; }
+
+    /* Hero */
+    .hero {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 90px 20px 50px;
+      animation: fadeUp 1s ease forwards;
+    }
+    .hero-title {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 25px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    /* Subscribe Form */
+    .subscribe-form {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 0.9s;
+    }
+    .subscribe-form input {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      flex: 1;
+      max-width: 250px;
+    }
+    .subscribe-form button {
+      padding: 10px 18px;
+      font-size: 1rem;
+      background: #000;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .subscribe-form button:hover { background: #333; }
+
+    /* Blog Container */
+    .blog-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .post {
+      padding: 25px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      background: #fff;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+    .post:hover {
+      background: #fafafa;
+      transform: translateY(-3px);
+    }
+    .post h2 {
+      margin-bottom: 10px;
+      font-size: 1.7rem;
+      font-weight: 600;
+    }
+    .post p {
+      color: #555;
+      font-size: 1rem;
+    }
+
+    /* Full Post */
+    .full-post {
+      max-width: 740px;
+      margin: 60px auto;
+      padding: 0 20px;
+      font-family: "Georgia", serif;
+      line-height: 1.8;
+      color: #222;
+      animation: fadeUp 0.6s ease forwards;
+    }
+    .full-post h1 {
+      font-size: 2.4rem;
+      margin-bottom: 25px;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+    .full-post p {
+      font-size: 1.15rem;
+      color: #333;
+      margin-bottom: 25px;
+    }
+    .back-btn {
+      margin-top: 40px;
+      padding: 10px 18px;
+      background: #111;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .back-btn:hover { background: #333; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(270deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+      background-size: 800% 800%;
+      animation: gradientMove 15s ease infinite;
+      font-size: 0.9rem;
+      color: #222;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .nav-right { display: none; flex-direction: column; background: white; position: absolute; top: 60px; right: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 10px 20px; }
+      .nav-right.show { display: flex; }
+      .menu-btn { display: block; }
+    }
+  </style>
 </head>
+
 <body>
   <!-- Navigation -->
   <nav class="navbar">
@@ -51,8 +247,8 @@
 
   <!-- Hero -->
   <header class="hero">
-    <h1 class="hero-title">Welcome to The&ndash;UCN&ndash;Times</h1>
-    <p class="hero-subtitle">Sharing ideas, stories, and thoughts &ndash; one post at a time.</p>
+    <h1 class="hero-title">Welcome to The–UCN–Times</h1>
+    <p class="hero-subtitle">Sharing ideas, stories, and thoughts – one post at a time.</p>
     <form class="subscribe-form">
       <input type="email" placeholder="Enter your email" required />
       <button type="submit">Proceed</button>
@@ -60,28 +256,71 @@
   </header>
 
   <!-- Blog Section -->
-  <main class="blog-container" id="blog-container">
-    <!-- Posts will be injected by JS -->
-  </main>
+  <main class="blog-container" id="blog-container"></main>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 All Rights Reserved </p>
+    <p>&copy; 2025 All Rights Reserved</p>
   </footer>
 
-  <!-- Scripts -->
-  <script src="script.js"></script>
+  <!-- JS -->
   <script>
-    // Hamburger toggle
+    const posts = [
+      {
+        title: "How Small Habits Change Your Life",
+        description: "Big results come from small daily improvements. Here's why.",
+        content: "Small habits are powerful because they build lasting change quietly. When you start with something small—like drinking more water, reading a few pages a day, or walking for ten minutes—you set the stage for bigger results..."
+      },
+      {
+        title: "Why Simplicity Wins",
+        description: "In design, business, and life — less is often more.",
+        content: "Simplicity is powerful because it removes the unnecessary and directs our focus to what truly matters. Complex plans, cluttered spaces, and overthinking create stress and confusion..."
+      },
+      {
+        title: "The Power of Consistency",
+        description: "Consistency beats intensity in the long run.",
+        content: "Consistency is the bridge between goals and results. It’s not about working the hardest once, but about showing up again and again, even when progress feels slow..."
+      }
+    ];
+
+    const container = document.getElementById("blog-container");
+
+    function showPosts() {
+      container.innerHTML = "";
+      posts.forEach((post, i) => {
+        const div = document.createElement("div");
+        div.className = "post";
+        div.innerHTML = `
+          <h2>${post.title}</h2>
+          <p>${post.description}</p>
+          <button class="read-more" onclick="showPost(${i})">Read more →</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function showPost(i) {
+      const post = posts[i];
+      container.innerHTML = `
+        <article class="full-post">
+          <h1>${post.title}</h1>
+          <p>${post.content}</p>
+          <button class="back-btn" onclick="showPosts()">← Back</button>
+        </article>
+      `;
+    }
+
+    // Init
+    showPosts();
+
+    // Mobile menu
     const menuBtn = document.getElementById("menu-btn");
     const navLinks = document.getElementById("nav-links");
-
-    menuBtn.onclick = () => {
-      navLinks.classList.toggle("show");
-    };
+    menuBtn.onclick = () => navLinks.classList.toggle("show");
   </script>
 </body>
 </html>
+
 
 
 
