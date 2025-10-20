@@ -387,6 +387,59 @@ footer {
     font-size: 0.9rem;
   }
 }
+
+
+  /* 🌙 Dark Mode */
+.dark-mode footer {
+  background: #111;
+  color: #eee;
+  border-color: #222;
+}
+
+.dark-mode a {
+  color: #ddd;
+}
+
+.dark-mode .newsletter input {
+  background: #222;
+  color: #fff;
+  border-color: #333;
+}
+
+.dark-mode .newsletter button {
+  background: #fff;
+  color: #000;
+}
+
+/* ⬆️ Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: #000;
+}
+
 </style>
 </head>
 <body>
@@ -437,23 +490,23 @@ footer {
 <footer>
   <div class="footer-wrapper">
     <div class="footer-column about">
-      <h3>Unicorner</h3>
-      <p>Where economics meets creativity — ideas that move markets, minds, and meaning.</p>
+      <h3>The Unicorner Times</h3>
+      <p>Where youth meets creativity — ideas that move markets, minds, and meaning.</p>
     </div>
 
     <div class="footer-column links">
       <h4>Explore</h4>
-      <a href="/about.html">About</a>
-      <a href="/blogs.html">Blogs</a>
-      <a href="/authors.html">Authors</a>
-      <a href="/contact.html">Contact</a>
+      <a href="https://unicorner.uz/about">About</a>
+      <a href="https://blog.unicorner.uz">Blogs</a>
+      <a href="https://blog.unicorner.uz/author">Authors</a>
+      <a href="https://unicorner.uz/publish">Contact</a>
     </div>
 
     <div class="footer-column contact">
       <h4>Contact</h4>
       <p>📍 Tashkent, Uzbekistan</p>
-      <p>✉️ <a href="mailto:contact@unicorner.uz">contact@unicorner.uz</a></p>
-      <p>📞 +998 (90) 123-45-67</p>
+      <p>✉️ <a href="mailto:unicornertimes@mail.ru">unicornertimes@mail.ru</a></p>
+      <p>📞 +998 (**) ***-**-**</p>
     </div>
 
     <div class="footer-column social">
@@ -510,9 +563,59 @@ function setLang(lang) {
   document.querySelectorAll(".lang-select button").forEach(btn => btn.classList.remove("active"));
   event.target.classList.add("active");
 }
+
+
+ 
+// 🌙 Detect system theme and apply automatically
+function applyTheme() {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  if (prefersDark) {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+}
+applyTheme();
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+
+// ✉️ Newsletter submission (local success simulation)
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".newsletter");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = form.querySelector("input").value.trim();
+      if (email) {
+        alert("✅ Thank you for subscribing, " + email + "!");
+        form.reset();
+      }
+    });
+  }
+});
+
+// ⬆️ Floating "Back to Top" button
+const backToTop = document.createElement("button");
+backToTop.textContent = "↑";
+backToTop.className = "back-to-top";
+document.body.appendChild(backToTop);
+
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 400) {
+    backToTop.classList.add("visible");
+  } else {
+    backToTop.classList.remove("visible");
+  }
+});
+
+
 </script>
 </body>
 </html>
+
 
 
 
