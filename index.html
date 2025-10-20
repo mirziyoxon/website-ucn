@@ -193,15 +193,150 @@
     .back-btn:hover { background: #333; }
 
     /* Footer */
-    .footer {
-      text-align: center;
-      padding: 20px;
-      background: linear-gradient(270deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
-      background-size: 800% 800%;
-      animation: gradientMove 15s ease infinite;
-      font-size: 0.9rem;
-      color: #222;
-    }
+    footer {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 4rem 2rem 2rem;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--text);
+  animation: fadeInUp 1s ease;
+}
+
+/* TOP SECTION */
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+}
+
+.footer-brand h2 {
+  font-size: 1.6rem;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+}
+
+.footer-brand p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.footer-brand .address {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.footer-brand a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* LINKS */
+.footer-links h3 {
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+  color: var(--accent);
+}
+
+.footer-links a {
+  display: block;
+  color: var(--muted);
+  text-decoration: none;
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+/* NEWSLETTER */
+.footer-news h3 {
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+}
+
+.footer-news p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.8rem;
+}
+
+.footer-news form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.footer-news input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  font-size: 0.95rem;
+}
+
+.footer-news button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.footer-news button:hover {
+  background: #000;
+}
+
+/* SOCIALS */
+.footer-socials {
+  display: flex;
+  gap: 0.8rem;
+  font-size: 1.4rem;
+}
+
+.footer-socials a {
+  color: var(--accent);
+  transition: transform 0.2s ease, color 0.2s ease;
+  text-decoration: none;
+}
+
+.footer-socials a:hover {
+  transform: translateY(-3px);
+  color: #000;
+}
+
+/* BOTTOM */
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+  .footer-news form {
+    flex-direction: column;
+  }
+  .footer-news button {
+    width: 100%;
+  }
+  .footer-socials {
+    justify-content: center;
+  }
+}
+
 
     /* Animations */
     @keyframes fadeUp {
@@ -259,9 +394,46 @@
   <main class="blog-container" id="blog-container"></main>
 
   <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2025 All Rights Reserved</p>
-  </footer>
+  <footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h2>Unicorner</h2>
+      <p>Exploring ideas that shape the intersection of <strong>economics</strong>, <strong>design</strong>, and <strong>innovation</strong>.</p>
+      <p class="address">📍 Tashkent, Uzbekistan<br>
+      ✉️ <a href="mailto:contact@unicorner.uz">contact@unicorner.uz</a><br>
+      ☎️ +998 (90) 123-45-67</p>
+    </div>
+
+    <div class="footer-links">
+      <h3>Explore</h3>
+      <a href="#">About Us</a>
+      <a href="#">Authors</a>
+      <a href="#">Careers</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <div class="footer-news">
+      <h3>Stay Updated</h3>
+      <p>Subscribe to our weekly digest on business, tech, and economics.</p>
+      <form id="subscribe-form">
+        <input type="email" placeholder="Enter your email" required />
+        <button type="submit">Subscribe</button>
+      </form>
+      <div class="footer-socials">
+        <a href="https://t.me/unicorner_times" target="_blank" aria-label="Telegram">💬</a>
+        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">🔗</a>
+        <a href="https://github.com" target="_blank" aria-label="GitHub">💻</a>
+        <a href="https://x.com" target="_blank" aria-label="X / Twitter">🐦</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Unicorner Media. Developed with purpose in Uzbekistan. All rights reserved.</p>
+  </div>
+</footer>
+
 
   <!-- JS -->
   <script>
@@ -320,6 +492,7 @@
   </script>
 </body>
 </html>
+
 
 
 
