@@ -390,34 +390,6 @@ footer {
 
 
   
-/* ⬆️ Back to Top Button */
-.back-to-top {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  background: #222;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-  font-size: 1.2rem;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  z-index: 999;
-}
-
-.back-to-top.visible {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-.back-to-top:hover {
-  background: #000;
-}
 
 </style>
 </head>
@@ -561,28 +533,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// ⬆️ Floating "Back to Top" button
-const backToTop = document.createElement("button");
-backToTop.textContent = "↑";
-backToTop.className = "back-to-top";
-document.body.appendChild(backToTop);
-
-backToTop.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 400) {
-    backToTop.classList.add("visible");
-  } else {
-    backToTop.classList.remove("visible");
-  }
-});
-
 
 </script>
 </body>
 </html>
+
 
 
 
