@@ -389,28 +389,7 @@ footer {
 }
 
 
-  /* 🌙 Dark Mode */
-.dark-mode footer {
-  background: #111;
-  color: #eee;
-  border-color: #222;
-}
-
-.dark-mode a {
-  color: #ddd;
-}
-
-.dark-mode .newsletter input {
-  background: #222;
-  color: #fff;
-  border-color: #333;
-}
-
-.dark-mode .newsletter button {
-  background: #fff;
-  color: #000;
-}
-
+  
 /* ⬆️ Back to Top Button */
 .back-to-top {
   position: fixed;
@@ -566,17 +545,6 @@ function setLang(lang) {
 
 
  
-// 🌙 Detect system theme and apply automatically
-function applyTheme() {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  if (prefersDark) {
-    document.body.classList.add("dark-mode");
-  } else {
-    document.body.classList.remove("dark-mode");
-  }
-}
-applyTheme();
-window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
 
 // ✉️ Newsletter submission (local success simulation)
 document.addEventListener("DOMContentLoaded", () => {
@@ -615,6 +583,7 @@ window.addEventListener("scroll", () => {
 </script>
 </body>
 </html>
+
 
 
 
