@@ -448,40 +448,36 @@ footer {
 </section>
 
 <footer>
-  <div class="footer-container">
-    <div class="footer-brand">
-      <h2>Unicorner</h2>
-      <p>Your gateway to insight, innovation, and intelligent stories.</p>
-      <div class="socials">
-        <a href="https://t.me/unicorner_times" target="_blank">Telegram</a>
-        <a href="#">LinkedIn</a>
-        <a href="#">X (Twitter)</a>
-      </div>
+  <div class="footer-wrapper">
+    <div class="footer-column about">
+      <h3>Unicorner</h3>
+      <p>Where economics meets creativity — ideas that move markets, minds, and meaning.</p>
     </div>
 
-    <div class="footer-links">
-      <h3>Explore</h3>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Authors</a></li>
-        <li><a href="#">Podcasts</a></li>
-        <li><a href="#">Research</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+    <div class="footer-column links">
+      <h4>Explore</h4>
+      <a href="/about.html">About</a>
+      <a href="/blogs.html">Blogs</a>
+      <a href="/authors.html">Authors</a>
+      <a href="/contact.html">Contact</a>
     </div>
 
-    <div class="footer-contact">
-      <h3>Contact</h3>
+    <div class="footer-column contact">
+      <h4>Contact</h4>
       <p>📍 Tashkent, Uzbekistan</p>
-      <p>📞 +998 90 123 45 67</p>
-      <p>✉️ info@unicorner.uz</p>
+      <p>✉️ <a href="mailto:contact@unicorner.uz">contact@unicorner.uz</a></p>
+      <p>📞 +998 (90) 123-45-67</p>
     </div>
 
-    <div class="footer-newsletter">
-      <h3>Newsletter</h3>
-      <p>Join 10,000+ thinkers and get our weekly insights.</p>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Enter your email" required />
+    <div class="footer-column social">
+      <h4>Stay Connected</h4>
+      <div class="social-icons">
+        <a href="https://t.me/unicorner_times" target="_blank">Telegram</a>
+        <a href="https://www.instagram.com/unicorner.uz" target="_blank">Instagram</a>
+        <a href="https://x.com/unicorner" target="_blank">X (Twitter)</a>
+      </div>
+      <form class="newsletter">
+        <input type="email" placeholder="Your email" required>
         <button type="submit">Subscribe</button>
       </form>
     </div>
@@ -489,9 +485,140 @@ footer {
 
   <div class="footer-bottom">
     <p>© 2025 Unicorner. All rights reserved.</p>
-    <p>Crafted with ❤️ in Uzbekistan.</p>
   </div>
 </footer>
+
+<style>
+footer {
+  background: #f9f9f9;
+  border-top: 1px solid #e0e0e0;
+  color: #333;
+  font-family: "Inter", sans-serif;
+  padding: 3rem 2rem 1rem;
+}
+
+.footer-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* === Columns === */
+.footer-column {
+  flex: 1 1 250px;
+  min-width: 230px;
+}
+
+.footer-column h3,
+.footer-column h4 {
+  color: #111;
+  margin-bottom: 0.8rem;
+}
+
+.footer-column p,
+.footer-column a {
+  color: #555;
+  font-size: 0.95rem;
+  text-decoration: none;
+  display: block;
+  margin: 0.4rem 0;
+  transition: color 0.3s;
+}
+
+.footer-column a:hover {
+  color: #000;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin-right: 1rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.newsletter {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 0.8rem;
+}
+
+.newsletter input {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.newsletter button {
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 0 0.5rem 0.5rem 0;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.newsletter button:hover {
+  background: #000;
+}
+
+/* === Footer Bottom === */
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 2rem;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* === Tablet & Mobile Responsive === */
+@media (max-width: 1024px) {
+  .footer-wrapper {
+    justify-content: center;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .newsletter {
+    flex-direction: column;
+  }
+
+  .newsletter input,
+  .newsletter button {
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+
+  .social-icons {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  footer {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .footer-column {
+    min-width: 100%;
+  }
+
+  .footer-column h4 {
+    margin-top: 1rem;
+  }
+
+  .newsletter input {
+    margin-bottom: 0.5rem;
+  }
+}
+</style>
+
 
 
 <script>
@@ -531,6 +658,7 @@ function setLang(lang) {
 </script>
 </body>
 </html>
+
 
 
 
