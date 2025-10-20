@@ -471,9 +471,15 @@ setInterval(() => {
     // Logolarni cheksiz oqishi uchun dublikat qilish
   const logos = document.querySelector(".logos");
   logos.innerHTML += logos.innerHTML; 
+
+    // disable right-click and image dragging
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.addEventListener('dragstart', event => event.preventDefault());
+
   </script>
 </body>
 </html>
+
 
 
 
