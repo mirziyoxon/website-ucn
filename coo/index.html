@@ -206,146 +206,133 @@ header {
 
 /* ===== FOOTER ===== */
 footer {
-  background: #111;
-  color: #f1f1f1;
-  padding: 4rem 2rem 2rem;
-  font-family: "Inter", system-ui, sans-serif;
+  background: #f9f9f9;
+  border-top: 1px solid #e0e0e0;
+  color: #333;
+  font-family: "Inter", sans-serif;
+  padding: 3rem 2rem 1rem;
 }
 
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2.5rem;
+.footer-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
   max-width: 1200px;
   margin: auto;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding-bottom: 2rem;
 }
 
-.footer-brand h2 {
-  font-size: 1.6rem;
-  color: white;
+/* === Columns === */
+.footer-column {
+  flex: 1 1 250px;
+  min-width: 230px;
+}
+
+.footer-column h3,
+.footer-column h4 {
+  color: #111;
   margin-bottom: 0.8rem;
 }
 
-.footer-brand p {
+.footer-column p,
+.footer-column a {
+  color: #555;
   font-size: 0.95rem;
-  color: #bbb;
-  margin-bottom: 1.2rem;
-  line-height: 1.6;
+  text-decoration: none;
+  display: block;
+  margin: 0.4rem 0;
+  transition: color 0.3s;
 }
 
-.socials a {
-  margin-right: 0.8rem;
-  text-decoration: none;
-  color: #ddd;
+.footer-column a:hover {
+  color: #000;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin-right: 1rem;
+  color: #555;
   font-weight: 500;
-  transition: color 0.3s;
 }
 
-.socials a:hover {
-  color: white;
-}
-
-.footer-links h3,
-.footer-contact h3,
-.footer-newsletter h3 {
-  color: white;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-links ul li {
-  margin-bottom: 0.6rem;
-}
-
-.footer-links ul li a {
-  color: #bbb;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.3s;
-}
-
-.footer-links ul li a:hover {
-  color: white;
-}
-
-.footer-contact p {
-  color: #bbb;
-  font-size: 0.95rem;
-  margin-bottom: 0.4rem;
-}
-
-.footer-newsletter p {
-  color: #bbb;
-  font-size: 0.95rem;
-  margin-bottom: 0.8rem;
-}
-
-.newsletter-form {
+.newsletter {
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: nowrap;
+  margin-top: 0.8rem;
 }
 
-.newsletter-form input {
+.newsletter input {
   flex: 1;
-  padding: 0.6rem;
-  border-radius: 4px;
-  border: none;
-  outline: none;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem 0 0 0.5rem;
   font-size: 0.9rem;
 }
 
-.newsletter-form button {
-  background: white;
-  color: #111;
+.newsletter button {
+  background: #222;
+  color: white;
   border: none;
+  border-radius: 0 0.5rem 0.5rem 0;
   padding: 0.6rem 1rem;
-  border-radius: 4px;
-  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s;
 }
 
-.newsletter-form button:hover {
-  background: #ddd;
+.newsletter button:hover {
+  background: #000;
 }
 
+/* === Footer Bottom === */
 .footer-bottom {
   text-align: center;
-  padding-top: 1.5rem;
-  font-size: 0.85rem;
-  color: #888;
+  padding-top: 2rem;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 2rem;
+  color: #777;
+  font-size: 0.9rem;
 }
 
-.footer-bottom p {
-  margin: 0.2rem 0;
-}
-
-/* ===== MOBILE FRIENDLY ===== */
-@media (max-width: 768px) {
-  footer {
-    padding: 3rem 1.5rem 1.5rem;
+/* === Tablet & Mobile Responsive === */
+@media (max-width: 1024px) {
+  .footer-wrapper {
+    justify-content: center;
+    gap: 1.5rem;
+    text-align: center;
   }
 
-  .footer-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .newsletter-form {
+  .newsletter {
     flex-direction: column;
   }
 
-  .newsletter-form button {
+  .newsletter input,
+  .newsletter button {
     width: 100%;
+    border-radius: 0.5rem;
   }
 
+  .social-icons {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  footer {
+    padding: 2rem 1rem 1rem;
+  }
+
+  .footer-column {
+    min-width: 100%;
+  }
+
+  .footer-column h4 {
+    margin-top: 1rem;
+  }
+
+  .newsletter input {
+    margin-bottom: 0.5rem;
+  }
+}
 /* ===== ANIMATIONS ===== */
 @keyframes fadeInUp {
   0% {opacity: 0; transform: translateY(20px);}
@@ -488,138 +475,6 @@ footer {
   </div>
 </footer>
 
-<style>
-footer {
-  background: #f9f9f9;
-  border-top: 1px solid #e0e0e0;
-  color: #333;
-  font-family: "Inter", sans-serif;
-  padding: 3rem 2rem 1rem;
-}
-
-.footer-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: auto;
-}
-
-/* === Columns === */
-.footer-column {
-  flex: 1 1 250px;
-  min-width: 230px;
-}
-
-.footer-column h3,
-.footer-column h4 {
-  color: #111;
-  margin-bottom: 0.8rem;
-}
-
-.footer-column p,
-.footer-column a {
-  color: #555;
-  font-size: 0.95rem;
-  text-decoration: none;
-  display: block;
-  margin: 0.4rem 0;
-  transition: color 0.3s;
-}
-
-.footer-column a:hover {
-  color: #000;
-}
-
-.social-icons a {
-  display: inline-block;
-  margin-right: 1rem;
-  color: #555;
-  font-weight: 500;
-}
-
-.newsletter {
-  display: flex;
-  flex-wrap: nowrap;
-  margin-top: 0.8rem;
-}
-
-.newsletter input {
-  flex: 1;
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 0.5rem 0 0 0.5rem;
-  font-size: 0.9rem;
-}
-
-.newsletter button {
-  background: #222;
-  color: white;
-  border: none;
-  border-radius: 0 0.5rem 0.5rem 0;
-  padding: 0.6rem 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.newsletter button:hover {
-  background: #000;
-}
-
-/* === Footer Bottom === */
-.footer-bottom {
-  text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid #e5e5e5;
-  margin-top: 2rem;
-  color: #777;
-  font-size: 0.9rem;
-}
-
-/* === Tablet & Mobile Responsive === */
-@media (max-width: 1024px) {
-  .footer-wrapper {
-    justify-content: center;
-    gap: 1.5rem;
-    text-align: center;
-  }
-
-  .newsletter {
-    flex-direction: column;
-  }
-
-  .newsletter input,
-  .newsletter button {
-    width: 100%;
-    border-radius: 0.5rem;
-  }
-
-  .social-icons {
-    margin-bottom: 1rem;
-  }
-}
-
-@media (max-width: 600px) {
-  footer {
-    padding: 2rem 1rem 1rem;
-  }
-
-  .footer-column {
-    min-width: 100%;
-  }
-
-  .footer-column h4 {
-    margin-top: 1rem;
-  }
-
-  .newsletter input {
-    margin-bottom: 0.5rem;
-  }
-}
-</style>
-
-
 
 <script>
 function setLang(lang) {
@@ -658,6 +513,7 @@ function setLang(lang) {
 </script>
 </body>
 </html>
+
 
 
 
