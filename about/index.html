@@ -279,6 +279,12 @@
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
+
+    h3 a:hover {
+  text-decoration: underline;
+  color: #000;
+  transition: color 0.2s ease;
+}
   </style>
 </head>
 <body>
@@ -340,7 +346,11 @@
       <div class="slides">
         <div class="member">
           <img src="pics/abu2.PNG" alt="Member 1">
-          <h3>Abduqodirjon Bakhromov</h3>
+          <h3>
+  <a href="https://unicorner.uz/coo" style="color: inherit; text-decoration: none;">
+    Abduqodirjon Bakhromov
+  </a>
+</h3>
           <p>Co-Author @ UGS Tashkent</p>
         </div>
 
@@ -479,6 +489,7 @@ document.addEventListener('dragstart', event => event.preventDefault());
   </script>
 </body>
 </html>
+
 
 
 
