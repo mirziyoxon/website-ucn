@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy</title>
+<style>
+:root {
+  --bg: #f9f9f9;
+  --card: #fff;
+  --text: #222;
+  --muted: #555;
+  --accent: #111;
+  --border: #e0e0e0;
+}
+
+/* ===== GLOBAL ===== */
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  line-height: 1.8;
+  scroll-behavior: smooth;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  animation: fadeDown 0.6s ease;
+}
+
+.logo {
+  font-family: "Old English Text MT", "Georgia", serif;
+  font-size: 1.6rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.lang-btn {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--accent);
+  transition: all 0.3s ease;
+}
+.lang-btn:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* ===== MAIN ===== */
+main {
+  max-width: 850px;
+  margin: 5rem auto;
+  padding: 0 1.5rem;
+  animation: fadeInUp 1s ease;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+
+.policy-card {
+  background: var(--card);
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+  padding: 2.5rem;
+  border: 1px solid var(--border);
+}
+
+.policy-card h2 {
+  color: var(--accent);
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.policy-card p, li {
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.policy-card ul {
+  margin-left: 1.5rem;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: #fff;
+  border-top: 1px solid var(--border);
+  padding: 3rem 2rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  animation: fadeIn 1.5s ease;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.footer-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+}
+
+footer p {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  main { margin: 4rem 0; }
+  .policy-card { padding: 1.6rem; }
+  h1 { font-size: 1.7rem; }
+  .lang-btn { font-size: 0.8rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="#" class="logo">Unicorner</a>
+  <button class="lang-btn" id="langBtn">???? O‘zbekcha</button>
+</header>
+
+<main>
+  <h1 id="policyTitle">Privacy Policy</h1>
+  <div class="policy-card" id="policyContent"></div>
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="#">Home</a>
+    <a href="#">Blogs</a>
+    <a href="#">About</a>
+    <a href="#">Authors</a>
+    <a href="#">Contact</a>
+  </div>
+  <p>?? Tashkent, Uzbekistan | ?? contact@example.com | ?? +998 90 000 0000</p>
+  <p>© <span id="year"></span> All rights reserved.</p>
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const langBtn = document.getElementById("langBtn");
+const title = document.getElementById("policyTitle");
+const content = document.getElementById("policyContent");
+
+const en = `
+<p><strong>Effective Date:</strong> October 2025</p>
+
+<h2>1. Introduction</h2>
+<p>This Privacy Policy explains how this website collects, uses, and protects your information. We are committed to maintaining the trust and confidence of our visitors.</p>
+
+<h2>2. Information We Collect</h2>
+<ul>
+  <li>Personal details such as your name, email address, and contact information.</li>
+  <li>Usage data including your browsing activity, device type, and approximate location.</li>
+  <li>Cookies that help improve performance and remember preferences.</li>
+</ul>
+
+<h2>3. How We Use Information</h2>
+<p>The information we collect is used to:</p>
+<ul>
+  <li>Provide and improve the content and services we offer.</li>
+  <li>Communicate updates, newsletters, or relevant information.</li>
+  <li>Maintain the security and performance of the platform.</li>
+</ul>
+
+<h2>4. Cookies and Tracking</h2>
+<p>Cookies are small text files stored on your device. We use them to personalize your experience and analyze usage patterns. You may disable cookies in your browser settings at any time.</p>
+
+<h2>5. Third-Party Services</h2>
+<p>Our website may include links or embedded content from third-party platforms such as analytics tools or social media. These platforms may collect information independently under their own privacy policies.</p>
+
+<h2>6. Data Retention</h2>
+<p>We keep your data only as long as necessary to fulfill the purposes described in this policy, unless a longer retention period is required by law.</p>
+
+<h2>7. Data Security</h2>
+<p>We take appropriate technical and organizational measures to safeguard your data. However, no method of transmission over the internet is completely secure, and we cannot guarantee absolute protection.</p>
+
+<h2>8. Your Rights</h2>
+<p>You have the right to request access to, correction of, or deletion of your personal data. To exercise these rights, please contact us directly.</p>
+
+<h2>9. Policy Updates</h2>
+<p>We may occasionally update this policy to reflect changes in our practices or regulations. The revised version will always include the date of the latest update.</p>
+
+<h2>10. Contact</h2>
+<p>If you have questions about this Privacy Policy or how we handle your information, please contact us at: <a href="mailto:contact@example.com">contact@example.com</a></p>
+`;
+
+const uz = `
+<p><strong>Amal qilish sanasi:</strong> 2025-yil oktabr</p>
+
+<h2>1. Kirish</h2>
+<p>Ushbu Maxfiylik siyosati foydalanuvchilar haqidagi ma?lumotlar qanday yig?ilishi, ishlatilishi va himoya qilinishini tushuntiradi. Biz foydalanuvchilar ishonchini saqlashga sodiqmiz.</p>
+
+<h2>2. Yig?iladigan ma?lumotlar</h2>
+<ul>
+  <li>Ism, elektron pochta manzili kabi shaxsiy ma?lumotlar.</li>
+  <li>Sayt faoliyatingiz, qurilma turi va taxminiy joylashuvingiz haqidagi ma?lumotlar.</li>
+  <li>Sayt ishlashini yaxshilash va afzalliklarni eslab qolish uchun cookie fayllar.</li>
+</ul>
+
+<h2>3. Ma?lumotlardan foydalanish</h2>
+<p>Yig?ilgan ma?lumotlar quyidagi maqsadlarda ishlatiladi:</p>
+<ul>
+  <li>Sayt mazmuni va xizmatlarini yaxshilash.</li>
+  <li>Yangiliklar, xabarlar yoki dolzarb ma?lumotlarni yuborish.</li>
+  <li>Xavfsizlik va ishlash sifatini ta?minlash.</li>
+</ul>
+
+<h2>4. Cookie fayllar</h2>
+<p>Cookie fayllar sizning qurilmangizda saqlanadigan kichik matn fayllaridir. Ular sayt tajribasini shaxsiylashtirish va foydalanish faoliyatini tahlil qilishga yordam beradi. Istasangiz, cookie fayllarni brauzer sozlamalari orqali o‘chirib qo‘yishingiz mumkin.</p>
+
+<h2>5. Uchinchi tomon xizmatlari</h2>
+<p>Saytimizda uchinchi tomon platformalari (masalan, tahlil vositalari yoki ijtimoiy tarmoqlar) havolalari bo‘lishi mumkin. Ular o‘z siyosatlari asosida mustaqil ravishda ma?lumot to‘plashi mumkin.</p>
+
+<h2>6. Ma?lumotlarni saqlash muddati</h2>
+<p>Ma?lumotlar faqat zarur muddat davomida saqlanadi. Agar qonunchilik talab qilsa, bu muddat uzaytirilishi mumkin.</p>
+
+<h2>7. Ma?lumotlarni himoya qilish</h2>
+<p>Biz ma?lumotlaringizni himoya qilish uchun barcha zarur texnik choralarni ko‘ramiz. Biroq, internet orqali uzatish to‘liq xavfsizlikni kafolatlamaydi.</p>
+
+<h2>8. Foydalanuvchi huquqlari</h2>
+<p>Siz o‘z ma?lumotlaringizni ko‘rish, tahrirlash yoki o‘chirishni so‘rash huquqiga egasiz. Buning uchun biz bilan bevosita bog‘laning.</p>
+
+<h2>9. Siyosatdagi o‘zgarishlar</h2>
+<p>Maxfiylik siyosati vaqti-vaqti bilan yangilanib turadi. Eng so‘nggi versiyada yangilangan sana ko‘rsatiladi.</p>
+
+<h2>10. Aloqa</h2>
+<p>Agar ushbu siyosat bo‘yicha savollaringiz bo‘lsa, biz bilan quyidagi manzil orqali bog‘laning: <a href="mailto:contact@example.com">contact@example.com</a></p>
+`;
+
+let isUz = false;
+content.innerHTML = en;
+
+langBtn.addEventListener("click", () => {
+  if (isUz) {
+    content.innerHTML = en;
+    title.textContent = "Privacy Policy";
+    langBtn.textContent = "???? O‘zbekcha";
+    isUz = false;
+  } else {
+    content.innerHTML = uz;
+    title.textContent = "Maxfiylik siyosati";
+    langBtn.textContent = "???? English";
+    isUz = true;
+  }
+});
+</script>
+
+</body>
+</html>
