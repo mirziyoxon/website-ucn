@@ -1,16 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const isMobile = /android|avantgo|blackberry|iemobile|ipad|iphone|ipod|opera mini|mobile|windows phone/i.test(ua.toLowerCase());
+    if (isMobile) {
+      window.location.href = "https://m.unicorner.uz";
+    }
+  });
+</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>The Unicorner Times</title>
   <meta name="description" content="Unicorner Times — an independent digital platform exploring the crossroads of economics, innovation, design, and youth entrepreneurship in Central Asia and beyond.">
-<script>
-  // Redirect mobile and tablet users to another website
-  if (/Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)) {
-    window.location.href = "https://m.unicorner.uz"; // 
-  }
-</script>
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -665,6 +668,7 @@ document.getElementById("newsletter-form").addEventListener("submit", function(e
 </script>
 </body>
 </html>
+
 
 
 
