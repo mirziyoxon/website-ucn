@@ -1,502 +1,476 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <script src="https://cdn.counter.dev/script.js" data-id="2bd8482e-fdd4-490b-aa13-72b92d89a41e" data-utcoffset="5"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>The Unicorner Times — Hybrid NYT / The Guardian / New Yorker</title>
+  <meta name="description" content="Unicorner Times — a hybrid layout inspired by NYT, The Guardian and The New Yorker. Fully working search, featured, categories and article reader (static).">
 
-  <!-- Mobile Redirect -->
-  <script>
-  (function() {
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    const platform = navigator.platform || '';
-    const isMobile =
-      /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua) ||
-      /iPhone|iPod/i.test(platform) ||
-      (platform === 'iPad' || (/MacIntel/.test(platform) && navigator.maxTouchPoints > 1));
-
-    if (isMobile) window.location.replace("https://mob.unicorner.uz");
-  })();
-  </script>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unicorner – Startup & Innovation Time</title>
-  <meta name="description" content="Unicorner.uz — An open source to find research papers, articles, business ideas, books va startup insightlar.">
-  <meta name="keywords" content="ucn times, article, youth, hub, startup, research, open source, knowledge sharing, Unicorner, Unicorner times, toshkent times">
-  <link rel="icon" type="image/png" href="photo_2025-03-14_04-25-25.png" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Georgia', serif;
-      margin: 0;
-      background: #fff;
-      color: #222;
-      line-height: 1.6;
-      overflow-x: hidden;
+    :root{
+      --bg:#ffffff;
+      --text:#111;
+      --muted:#6b6b6b;
+      --accent:#222;
+      --accent-2:#0b0b0b;
+      --border:#e9e9e9;
+      --max:1100px;
+      --transition:200ms ease;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .masthead{
+      border-bottom:1px solid var(--border);
+      background:rgba(255,255,255,0.92);
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:blur(6px);
+    }
+    .mast-inner{
+      max-width:var(--max);margin:0 auto;display:flex;align-items:center;gap:20px;padding:18px 20px;
+    }
+    .brand{
+      font-family: 'Literata', Georgia, serif;
+      font-weight:700;font-size:28px;letter-spacing:1px;color:var(--accent-2);
+    }
+    .tagline{font-size:13px;color:var(--muted);margin-left:6px}
+
+    .nav-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+    .nav-right a{font-size:14px;color:var(--muted);padding:8px 10px;border-radius:6px}
+    .nav-right a:hover{background:#fafafa;color:var(--accent)}
+
+    .search-wrap{display:flex;align-items:center;gap:8px;border:1px solid var(--border);padding:6px;border-radius:8px}
+    .search-input{border:0;outline:0;padding:6px 8px;font-size:14px;width:260px}
+    .search-btn{background:transparent;border:0;padding:6px 8px;cursor:pointer}
+
+    .page{
+      max-width:var(--max);margin:28px auto;padding:0 20px;display:grid;grid-template-columns:1fr 320px;gap:28px;align-items:start
     }
 
-    /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 15px 20px;
-      border-bottom: 1px solid #eee;
-      background-color: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      animation: fadeDown 0.7s ease forwards;
+    .hero{
+      display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:stretch;margin-bottom:18px
     }
-    .logo {
-      font-size: 1.4rem;
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-      font-family: "Brush Script MT", cursive;
-      transition: color 0.3s;
+    .hero-hero{
+      padding:34px 26px;background:#fff;border-radius:6px;border:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:16px;
     }
-    .logo:hover { color: #ff6600; }
+    .hero-hero h1{font-family:Literata, Georgia, serif;font-size:32px;margin:0;line-height:1.05}
+    .hero-hero p{margin:0;color:var(--muted)}
+    .hero-hero .meta{font-size:13px;color:var(--muted)}
 
-    .nav-right {
-      display: flex;
-      gap: 20px;
+    .hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .feat-card{border:1px solid var(--border);padding:12px;border-radius:6px;background:#fff}
+    .feat-card h3{margin:6px 0;font-size:16px}
+    .feat-card p{margin:0;color:var(--muted);font-size:13px}
+
+    .articles{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .card{background:#fff;border:1px solid var(--border);padding:16px;border-radius:6px;display:flex;gap:14px;align-items:flex-start;transition:transform 180ms,var(--transition)}
+    .card:hover{transform:translateY(-6px)}
+    .card .thumb{width:140px;height:90px;background:#f2f2f2;border-radius:4px;flex-shrink:0}
+    .card h4{margin:0 0 6px 0;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+
+    .sidebar{position:relative}
+    .side-section{background:#fff;border:1px solid var(--border);padding:16px;border-radius:6px;margin-bottom:16px}
+    .side-section h4{margin:0 0 10px 0;font-size:15px}
+    .category-list{display:flex;flex-wrap:wrap;gap:6px}
+    .cat-btn{padding:8px 10px;border-radius:6px;border:1px solid var(--border);cursor:pointer;font-size:13px;background:transparent}
+    .cat-btn.active{background:#111;color:#fff;border-color:#111}
+
+    .reader{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:flex-start;justify-content:center;padding:40px;z-index:60}
+    .reader.show{display:flex}
+    .reader-inner{background:#fff;max-width:900px;width:100%;max-height:90vh;overflow:auto;border-radius:8px;padding:32px;position:relative}
+    .reader-inner h1{font-family:Literata, Georgia, serif;font-size:28px}
+    .reader-inner .meta{color:var(--muted);font-size:13px;margin-bottom:18px}
+    .reader-inner p{font-size:17px;color:var(--text);line-height:1.85}
+    .reader-close{position:absolute;right:18px;top:18px;background:#111;color:#fff;border:0;padding:8px 12px;border-radius:6px;cursor:pointer}
+
+    footer{margin-top:40px;border-top:1px solid var(--border);padding:28px 20px;background:transparent}
+    .footer-inner{max-width:var(--max);margin:0 auto;display:flex;gap:20px;align-items:flex-start}
+    .footer-left{flex:1}
+    .footer-right{width:320px}
+
+    .muted{color:var(--muted);font-size:13px}
+    button{cursor:pointer}
+
+    @media (max-width:1000px){
+      .page{grid-template-columns:1fr 300px}
+      .articles{grid-template-columns:1fr}
+      .hero{grid-template-columns:1fr}
+      .hero-grid{grid-template-columns:repeat(2,1fr)}
     }
-    .nav-right a {
-      text-decoration: none;
-      color: black;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-    .nav-right a:hover {
-      color: #ff6600;
-    }
-
-    .menu-btn { display: none; font-size: 1.8rem; cursor: pointer; }
-
-    /* Hero */
-    .hero {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 90px 20px 50px;
-      animation: fadeUp 1s ease forwards;
-    }
-    .hero-title {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards;
-      animation-delay: 0.3s;
-    }
-    .hero-subtitle {
-      font-size: 1.2rem;
-      color: #555;
-      margin-bottom: 25px;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards;
-      animation-delay: 0.6s;
-    }
-
-    /* Subscribe Form */
-    .subscribe-form {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      opacity: 0;
-      animation: fadeUp 1s ease forwards;
-      animation-delay: 0.9s;
-    }
-    .subscribe-form input {
-      padding: 10px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      flex: 1;
-      max-width: 250px;
-    }
-    .subscribe-form button {
-      padding: 10px 18px;
-      font-size: 1rem;
-      background: #000;
-      color: white;
-      border: none;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .subscribe-form button:hover { background: #333; }
-
-    /* Blog Container */
-    .blog-container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    .post {
-      padding: 25px;
-      border-bottom: 1px solid #eee;
-      cursor: pointer;
-      background: #fff;
-      transition: all 0.3s ease;
-      opacity: 0;
-      transform: translateY(15px);
-      animation: fadeUp 0.8s ease forwards;
-    }
-    .post:hover {
-      background: #fafafa;
-      transform: translateY(-3px);
-    }
-    .post h2 {
-      margin-bottom: 10px;
-      font-size: 1.7rem;
-      font-weight: 600;
-    }
-    .post p {
-      color: #555;
-      font-size: 1rem;
-    }
-
-    /* Full Post */
-    .full-post {
-      max-width: 740px;
-      margin: 60px auto;
-      padding: 0 20px;
-      font-family: "Georgia", serif;
-      line-height: 1.8;
-      color: #222;
-      animation: fadeUp 0.6s ease forwards;
-    }
-    .full-post h1 {
-      font-size: 2.4rem;
-      margin-bottom: 25px;
-      line-height: 1.3;
-      font-weight: 700;
-    }
-    .full-post p {
-      font-size: 1.15rem;
-      color: #333;
-      margin-bottom: 25px;
-    }
-    .back-btn {
-      margin-top: 40px;
-      padding: 10px 18px;
-      background: #111;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .back-btn:hover { background: #333; }
-
-    /* Footer */
-    footer {
-  background: #fff;
-  border-top: 1px solid var(--border);
-  padding: 4rem 2rem 2rem;
-  font-family: "Inter", system-ui, sans-serif;
-  color: var(--text);
-  animation: fadeInUp 1s ease;
-}
-
-/* TOP SECTION */
-.footer-top {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  max-width: 1100px;
-  margin: 0 auto 3rem;
-}
-
-.footer-brand h2 {
-  font-size: 1.6rem;
-  color: var(--accent);
-  margin-bottom: 0.8rem;
-}
-
-.footer-brand p {
-  color: var(--muted);
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-.footer-brand .address {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-}
-
-.footer-brand a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-/* LINKS */
-.footer-links h3 {
-  margin-bottom: 0.8rem;
-  font-size: 1.1rem;
-  color: var(--accent);
-}
-
-.footer-links a {
-  display: block;
-  color: var(--muted);
-  text-decoration: none;
-  margin: 0.3rem 0;
-  font-size: 0.95rem;
-  transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: var(--accent);
-}
-
-/* NEWSLETTER */
-.footer-news h3 {
-  color: var(--accent);
-  margin-bottom: 0.8rem;
-}
-
-.footer-news p {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-bottom: 0.8rem;
-}
-
-.footer-news form {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.footer-news input {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 0.6rem;
-  font-size: 0.95rem;
-}
-
-.footer-news button {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 0.6rem 1rem;
-  border-radius: 0.6rem;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.footer-news button:hover {
-  background: #000;
-}
-
-/* SOCIALS */
-.footer-socials {
-  display: flex;
-  gap: 0.8rem;
-  font-size: 1.4rem;
-}
-
-.footer-socials a {
-  color: var(--accent);
-  transition: transform 0.2s ease, color 0.2s ease;
-  text-decoration: none;
-}
-
-.footer-socials a:hover {
-  transform: translateY(-3px);
-  color: #000;
-}
-
-/* BOTTOM */
-.footer-bottom {
-  border-top: 1px solid var(--border);
-  padding-top: 1rem;
-  text-align: center;
-}
-
-.footer-bottom p {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-/* MOBILE */
-@media (max-width: 700px) {
-  .footer-news form {
-    flex-direction: column;
-  }
-  .footer-news button {
-    width: 100%;
-  }
-  .footer-socials {
-    justify-content: center;
-  }
-}
-
-
-    /* Animations */
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeDown {
-      0% { opacity: 0; transform: translateY(-20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes gradientMove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      .nav-right { display: none; flex-direction: column; background: white; position: absolute; top: 60px; right: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 10px 20px; }
-      .nav-right.show { display: flex; }
-      .menu-btn { display: block; }
+    @media (max-width:760px){
+      .mast-inner{padding:12px}
+      .nav-right{display:none}
+      .search-input{width:160px}
+      .page{grid-template-columns:1fr;gap:14px;padding:12px}
+      .hero-grid{grid-template-columns:1fr}
+      .card{flex-direction:column}
+      .card .thumb{width:100%;height:160px}
+      .reader-inner{padding:18px}
     }
   </style>
 </head>
-
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="https://unicorner.uz" class="logo">The Unicorner Times</a>
-    </div>
-    <div class="nav-right" id="nav-links">
-      <a href="/about">About</a>
-      <a href="https://book.unicorner.uz" target="_blank">Books</a>
-      <a href="https://research.unicorner.uz" target="_blank">Research</a>
-      <a href="https://article.unicorner.uz" target="_blank">Articles</a>
-      <a href="https://blog.unicorner.uz" target="_blank">Blogs</a>
-      <a href="https://unicorner.uz/publish">Publish</a>
-      <a href="#">EN</a>
-      <a href="https://local.unicorner.uz">UZ</a>
-    </div>
-    <div class="menu-btn" id="menu-btn">&#9776;</div>
-  </nav>
 
-  <!-- Hero -->
-  <header class="hero">
-    <h1 class="hero-title">Welcome to The–UCN–Times</h1>
-    <p class="hero-subtitle">Sharing ideas, stories, and thoughts – one post at a time.</p>
-    <form class="subscribe-form">
-      <input type="email" placeholder="Enter your email" required />
-      <button type="submit">Proceed</button>
-    </form>
-  </header>
+  <header class="masthead">
+    <div class="mast-inner">
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="brand">The Unicorner Times</div>
+        <div class="tagline">Economics • Design • Innovation</div>
+      </div>
 
-  <!-- Blog Section -->
-  <main class="blog-container" id="blog-container"></main>
+      <nav class="nav-right" aria-label="Main navigation">
+        <a href="#" data-link="front" class="nav-link">Home</a>
+        <a href="#" data-link="features" class="nav-link">Features</a>
+        <a href="#" data-link="opinion" class="nav-link">Opinion</a>
+        <a href="#" data-link="research" class="nav-link">Research</a>
+        <a href="#" data-link="publish" class="nav-link">Publish</a>
+      </nav>
 
-  <!-- Footer -->
-  <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <h2>Unicorner</h2>
-      <p>Exploring ideas that shape the intersection of <strong>economics</strong>, <strong>design</strong>, and <strong>innovation</strong>.</p>
-      <p class="address">📍 Tashkent, Uzbekistan<br>
-      ✉️ <a href="mailto:contact@unicorner.uz">contact@unicorner.uz</a><br>
-      ☎️ +998 (90) 123-45-67</p>
-    </div>
-
-    <div class="footer-links">
-      <h3>Explore</h3>
-      <a href="#">About Us</a>
-      <a href="#">Authors</a>
-      <a href="#">Careers</a>
-      <a href="#">Privacy Policy</a>
-      <a href="#">Contact</a>
-    </div>
-
-    <div class="footer-news">
-      <h3>Stay Updated</h3>
-      <p>Subscribe to our weekly digest on business, tech, and economics.</p>
-      <form id="subscribe-form">
-        <input type="email" placeholder="Enter your email" required />
-        <button type="submit">Subscribe</button>
-      </form>
-      <div class="footer-socials">
-        <a href="https://t.me/unicorner_times" target="_blank" aria-label="Telegram">💬</a>
-        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">🔗</a>
-        <a href="https://github.com" target="_blank" aria-label="GitHub">💻</a>
-        <a href="https://x.com" target="_blank" aria-label="X / Twitter">🐦</a>
+      <div class="search-wrap" role="search" aria-label="Search articles">
+        <input class="search-input" id="search" placeholder="Search articles, authors, topics..." aria-label="Search" />
+        <button class="search-btn" id="search-btn" title="Search">🔎</button>
       </div>
     </div>
+  </header>
+
+  <main class="page">
+    <section>
+      <div class="hero">
+        <div class="hero-hero" id="hero-hero">
+          <div class="meta">Top story • Updated Oct 26, 2025</div>
+          <h1 id="hero-title">How Micro-Decisions Build Giant Outcomes</h1>
+          <p id="hero-lead">A deep look at small daily choices that compound to form careers, institutions, and nations — and how designers and economists think about them.</p>
+          <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
+            <button class="cat-btn" data-cat="all">All</button>
+            <button class="cat-btn" data-cat="economics">Economics</button>
+            <button class="cat-btn" data-cat="design">Design</button>
+            <button class="cat-btn" data-cat="innovation">Innovation</button>
+            <button class="cat-btn" data-cat="opinion">Opinion</button>
+          </div>
+        </div>
+
+        <div class="hero-grid" id="hero-grid"></div>
+      </div>
+
+      <div style="display:flex;gap:10px;align-items:center;margin-bottom:18px">
+        <button id="btn-featured" class="cat-btn active">Featured</button>
+        <button id="btn-latest" class="cat-btn">Latest</button>
+        <div style="margin-left:auto;color:var(--muted);font-size:13px">Showing <span id="result-count">0</span> articles</div>
+      </div>
+
+      <section id="articles-list" class="articles"></section>
+    </section>
+
+    <aside class="sidebar">
+      <div class="side-section" style="position:sticky;top:92px">
+        <h4>Search tips</h4>
+        <p class="muted">Type a word — partial matches and similar words will match (fuzzy search enabled). Try <strong>consist</strong>, <strong>design</strong>, or <strong>founder</strong>.</p>
+      </div>
+
+      <div class="side-section">
+        <h4>Sections</h4>
+        <div class="category-list" id="category-list">
+          <button class="cat-btn" data-cat="all">All</button>
+          <button class="cat-btn" data-cat="economics">Economics</button>
+          <button class="cat-btn" data-cat="design">Design</button>
+          <button class="cat-btn" data-cat="innovation">Innovation</button>
+          <button class="cat-btn" data-cat="opinion">Opinion</button>
+          <button class="cat-btn" data-cat="startup">Startup</button>
+        </div>
+      </div>
+
+      <div class="side-section">
+        <h4>Featured authors</h4>
+        <ul style="margin:0;padding:0;list-style:none">
+          <li class="muted">— Aisha Rahmonova</li>
+          <li class="muted">— Jamshid K.</li>
+          <li class="muted">— Elena Petrova</li>
+        </ul>
+      </div>
+
+      <div class="side-section">
+        <h4>Subscribe</h4>
+        <form id="side-subscribe">
+          <input type="email" id="sub-email" placeholder="you@example.com" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;margin-bottom:8px" required>
+          <button style="width:100%;padding:8px;border-radius:6px;border:0;background:#111;color:#fff">Subscribe</button>
+        </form>
+      </div>
+    </aside>
+  </main>
+
+  <div class="reader" id="reader" aria-hidden="true">
+    <div class="reader-inner" role="article" id="reader-inner">
+      <button class="reader-close" id="reader-close">Close ✕</button>
+      <div id="reader-content"><!-- JS will populate --></div>
+    </div>
   </div>
 
-  <div class="footer-bottom">
-    <p>© 2025 Unicorner Media. Developed with purpose in Uzbekistan. All rights reserved.</p>
-  </div>
-</footer>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-left">
+        <div style="font-weight:700">The Unicorner Times</div>
+        <div class="muted" style="margin-top:6px">Exploring the intersection of economics, design and innovation. © 2025 Unicorner Media.</div>
+      </div>
+      <div class="footer-right">
+        <div style="display:flex;gap:8px;justify-content:flex-end">
+          <a href="#">Privacy</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-
-  <!-- JS -->
   <script>
-    const posts = [
-      {
-        title: "How Small Habits Change Your Life",
-        description: "Big results come from small daily improvements. Here's why.",
-        content: "Small habits are powerful because they build lasting change quietly. When you start with something small—like drinking more water, reading a few pages a day, or walking for ten minutes—you set the stage for bigger results..."
-      },
-      {
-        title: "Why Simplicity Wins",
-        description: "In design, business, and life — less is often more.",
-        content: "Simplicity is powerful because it removes the unnecessary and directs our focus to what truly matters. Complex plans, cluttered spaces, and overthinking create stress and confusion..."
-      },
-      {
-        title: "The Power of Consistency",
-        description: "Consistency beats intensity in the long run.",
-        content: "Consistency is the bridge between goals and results. It’s not about working the hardest once, but about showing up again and again, even when progress feels slow..."
-      }
+    // 12 demo articles
+    const ARTICLES = [
+      {id:0,title:"Why Simplicity Wins",category:"design",author:"Aisha Rahmonova",lead:"In design, business, and life — less is often more.",body:"Simplicity is powerful because it removes the unnecessary and directs our focus to what truly matters. Complex plans, cluttered spaces, and overthinking create stress and confusion. This long-form article explores case studies from product design to urban planning, showing that simplicity scales when paired with strong incentives and good governance.",tags:["simplicity","design","systems"],img:"https://picsum.photos/seed/p0/800/480",featured:true},
+      {id:1,title:"The Power of Consistency",category:"innovation",author:"Jamshid K.",lead:"Consistency beats intensity in the long run.",body:"Consistency is the bridge between goals and results. It’s not about working the hardest once, but about showing up again and again, even when progress feels slow. In this piece, we interview long-time practitioners and look at data from institutions that lasted centuries.",tags:["consistency","habits","systems"],img:"https://picsum.photos/seed/p1/800/480",featured:true},
+      {id:2,title:"From Paper to Prototype: A Founder's Story",category:"startup",author:"Elena Petrova",lead:"A founder from Tashkent on building under resource constraints.",body:"This interview follows a founder who launched a fintech startup with modest resources. We document their product decisions, pivots, and the ways they used design constraints to create stronger user experiences.",tags:["founder","startup","tashkent"],img:"https://picsum.photos/seed/p2/800/480",featured:true},
+      {id:3,title:"The Hidden Economics of Everyday Design",category:"economics",author:"Aisha Rahmonova",lead:"Why designers who understand incentives create far better products.",body:"Economics and design intersect in surprising ways. This feature explores how price signals, default settings, and small nudges can change behaviour, sometimes with outsized impact.",tags:["economics","design","nudges"],img:"https://picsum.photos/seed/p3/800/480",featured:false},
+      {id:4,title:"Small Habits, Big Results",category:"opinion",author:"Guest",lead:"Big results come from small daily improvements.",body:"We consider the moral dimensions of habit formation, the role of incentives, and the small-scale policy levers that can encourage better civic behaviour.",tags:["habits","policy","opinion"],img:"https://picsum.photos/seed/p4/800/480",featured:false},
+      {id:5,title:"Urban Labs: Rethinking Public Space",category:"design",author:"M. Karimov",lead:"How cities are using experiments to redesign streets and parks.",body:"A tour of municipal pilots and the surprising outcomes they produced when citizens were given more agency.",tags:["urban","design","cities"],img:"https://picsum.photos/seed/p5/800/480",featured:false},
+      {id:6,title:"Currency Choices and Everyday Trade",category:"economics",author:"L. Begim",lead:"How payment methods shape small businesses.",body:"From cash to mobile wallets, the choice of payment technology changes pricing, trust, and speed — with real consequences for micro-entrepreneurs.",tags:["currency","payments","economics"],img:"https://picsum.photos/seed/p6/800/480",featured:false},
+      {id:7,title:"The Designer's Toolkit for Persuasion",category:"design",author:"R. Aziz",lead:"Ethical persuasion for product people.",body:"A practical guide to nudges, defaults, and feedback loops that respect autonomy while improving outcomes.",tags:["nudges","design","ethics"],img:"https://picsum.photos/seed/p7/800/480",featured:false},
+      {id:8,title:"Scaling With Constraints",category:"startup",author:"N. Timur",lead:"How limitations can be a startup's secret weapon.",body:"Startups often treat constraints as problems — but constraints can force focus, prioritisation, and creative workarounds that later become competitive moats.",tags:["startup","constraints","scale"],img:"https://picsum.photos/seed/p8/800/480",featured:false},
+      {id:9,title:"Data, Democracy, and Design",category:"innovation",author:"E. Petrova",lead:"Building civic tech that citizens trust.",body:"We examine projects that bridged civic participation with human-centered design, and where they failed or succeeded.",tags:["civic","data","design"],img:"https://picsum.photos/seed/p9/800/480",featured:false},
+      {id:10,title:"Behavioral Nudges in Policy",category:"economics",author:"T. Sattarov",lead:"Small changes in policy with big effects.",body:"Examples of low-cost policy interventions that altered population behaviour without heavy-handed regulation.",tags:["policy","nudges","economics"],img:"https://picsum.photos/seed/p10/800/480",featured:false},
+      {id:11,title:"Why Local Networks Matter",category:"opinion",author:"Community Voice",lead:"The power of neighbourhood economies.",body:"Local networks of trust and barter sustain livelihoods in ways mainstream markets don't capture.",tags:["local","opinion","community"],img:"https://picsum.photos/seed/p11/800/480",featured:false}
     ];
 
-    const container = document.getElementById("blog-container");
-
-    function showPosts() {
-      container.innerHTML = "";
-      posts.forEach((post, i) => {
-        const div = document.createElement("div");
-        div.className = "post";
-        div.innerHTML = `
-          <h2>${post.title}</h2>
-          <p>${post.description}</p>
-          <button class="read-more" onclick="showPost(${i})">Read more →</button>
-        `;
-        container.appendChild(div);
+    // Levenshtein for fuzzy word matching
+    function levenshtein(a,b){
+      if(a===b) return 0;
+      const al=a.length, bl=b.length;
+      if(al===0) return bl; if(bl===0) return al;
+      const row = Array(bl+1).fill(0).map((_,i)=>i);
+      for(let i=1;i<=al;i++){
+        let prev = i;
+        for(let j=1;j<=bl;j++){
+          const tmp = row[j];
+          const cost = a[i-1]===b[j-1]?0:1;
+          row[j] = Math.min(row[j]+1, prev+1, row[j-1]+cost);
+          prev = tmp;
+        }
+      }
+      return row[bl];
+    }
+    function fuzzyMatchWord(query, word){
+      query = (query||'').toLowerCase(); word = (word||'').toLowerCase();
+      if(!query || !word) return false;
+      if(word.includes(query)) return true;
+      const d = levenshtein(query, word);
+      const threshold = Math.max(1, Math.floor(Math.min(query.length, word.length)/3));
+      return d <= threshold;
+    }
+    function articleMatchesQuery(article, q){
+      if(!q) return true;
+      q = q.trim().toLowerCase();
+      const tokens = q.split(/\s+/).filter(Boolean);
+      return tokens.every(tok => {
+        if(article.title.toLowerCase().includes(tok)) return true;
+        if(article.lead.toLowerCase().includes(tok)) return true;
+        if(article.author.toLowerCase().includes(tok)) return true;
+        if(article.category.toLowerCase().includes(tok)) return true;
+        if(article.tags.some(t=>t.toLowerCase().includes(tok))) return true;
+        const words = (article.title + ' ' + article.lead + ' ' + article.tags.join(' ')).split(/\W+/).filter(Boolean);
+        return words.some(w=>fuzzyMatchWord(tok,w));
       });
     }
 
-    function showPost(i) {
-      const post = posts[i];
-      container.innerHTML = `
-        <article class="full-post">
-          <h1>${post.title}</h1>
-          <p>${post.content}</p>
-          <button class="back-btn" onclick="showPosts()">← Back</button>
-        </article>
-      `;
+    // Rendering helpers
+    const heroGrid = document.getElementById('hero-grid');
+    const listEl = document.getElementById('articles-list');
+    const resultCountEl = document.getElementById('result-count');
+
+    function renderHeroGrid(){
+      heroGrid.innerHTML = '';
+      const featured = ARTICLES.filter(a=>a.featured).slice(0,4);
+      featured.forEach(a=>{
+        const el = document.createElement('div'); el.className='feat-card';
+        el.innerHTML = ''
+          + '<img src="'+a.img+'" alt="'+a.title+'" style="width:100%;height:120px;object-fit:cover;border-radius:4px">'
+          + '<h3>'+a.title+'</h3>'
+          + '<p class="muted">'+a.lead+'</p>'
+          + '<div style="margin-top:10px"><button class="open-article" data-idx="'+a.id+'">Read →</button></div>';
+        heroGrid.appendChild(el);
+      });
     }
 
-    // Init
-    showPosts();
+    function renderList({query='',category='all',mode='featured'}){
+      listEl.innerHTML='';
+      let results = ARTICLES.slice();
+      if(category && category!=='all') results = results.filter(a=>a.category===category);
+      if(query) results = results.filter(a=>articleMatchesQuery(a,query));
+      if(mode==='latest') results = results.sort((a,b)=>b.id-a.id);
+      else results = results.sort((a,b)=> (b.featured?1:0) - (a.featured?1:0) || b.id - a.id);
 
-    // Mobile menu
-    const menuBtn = document.getElementById("menu-btn");
-    const navLinks = document.getElementById("nav-links");
-    menuBtn.onclick = () => navLinks.classList.toggle("show");
+      if(results.length===0){
+        listEl.innerHTML = '<div style="grid-column:1/-1;padding:18px;border:1px dashed var(--border);border-radius:6px;color:var(--muted)">No articles matched — try simpler words or check categories.</div>';
+        resultCountEl.textContent = 0;
+        return;
+      }
+
+      results.forEach(article=>{
+        const el = document.createElement('article');
+        el.className='card';
+        el.innerHTML = ''
+          + '<div class="thumb" style="background-image:url('+article.img+');background-size:cover;background-position:center"></div>'
+          + '<div style="flex:1">'
+          +   '<div style="display:flex;gap:8px;align-items:center;margin-bottom:6px">'
+          +     '<div class="muted" style="font-size:12px">'+article.category.toUpperCase()+'</div>'
+          +     '<div class="muted" style="font-size:12px">•</div>'
+          +     '<div class="muted" style="font-size:12px">'+article.author+'</div>'
+          +   '</div>'
+          +   '<h4>'+article.title+'</h4>'
+          +   '<p class="muted">'+article.lead+'</p>'
+          +   '<div style="margin-top:8px;display:flex;gap:8px;align-items:center">'
+          +     '<button class="open-article" data-idx="'+article.id+'">Read</button>'
+          +     '<button class="share-btn" data-id="'+article.id+'">Share</button>'
+          +   '</div>'
+          + '</div>';
+        listEl.appendChild(el);
+      });
+
+      resultCountEl.textContent = results.length;
+    }
+
+    // initial render
+    renderHeroGrid();
+    renderList({query:'',category:'all',mode:'featured'});
+
+    // UI interactions
+    let activeCategory = 'all';
+    let activeMode = 'featured';
+
+    function setActiveCategory(cat){
+      activeCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(b=>b.classList.toggle('active', b.dataset.cat===cat));
+      renderList({query:document.getElementById('search').value,category:activeCategory,mode:activeMode});
+    }
+    document.querySelectorAll('.cat-btn').forEach(btn=>{
+      btn.addEventListener('click',e=>{
+        const cat = btn.dataset.cat || 'all';
+        setActiveCategory(cat);
+      });
+    });
+
+    document.getElementById('btn-featured').addEventListener('click',()=>{
+      activeMode='featured';
+      document.getElementById('btn-featured').classList.add('active');
+      document.getElementById('btn-latest').classList.remove('active');
+      renderList({query:document.getElementById('search').value,category:activeCategory,mode:activeMode});
+    });
+    document.getElementById('btn-latest').addEventListener('click',()=>{
+      activeMode='latest';
+      document.getElementById('btn-latest').classList.add('active');
+      document.getElementById('btn-featured').classList.remove('active');
+      renderList({query:document.getElementById('search').value,category:activeCategory,mode:activeMode});
+    });
+
+    const input = document.getElementById('search');
+    const searchBtn = document.getElementById('search-btn');
+    let searchTimer = null;
+    function runSearch(){
+      const q = input.value.trim();
+      renderList({query:q,category:activeCategory,mode:activeMode});
+    }
+    input.addEventListener('input',()=>{
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(runSearch,150);
+    });
+    searchBtn.addEventListener('click',runSearch);
+    input.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); runSearch(); } });
+
+    document.body.addEventListener('click',e=>{
+      const open = e.target.closest('.open-article');
+      if(open){
+        const idx = Number(open.dataset.idx);
+        openArticle(idx);
+      }
+      const share = e.target.closest('.share-btn');
+      if(share){
+        const id = Number(share.dataset.id);
+        const a = ARTICLES.find(x=>x.id===id);
+        if(a){
+          const url = window.location.href.split('#')[0] + '#article=' + a.id;
+          navigator.clipboard?.writeText(url).then(()=>{ alert('Link copied to clipboard') }).catch(()=>{ prompt('Copy link', url); });
+        }
+      }
+    });
+
+    // reader and deep-link
+    const reader = document.getElementById('reader');
+    const readerContent = document.getElementById('reader-content');
+    document.getElementById('reader-close').addEventListener('click',closeReader);
+    reader.addEventListener('click',e=>{ if(e.target===reader) closeReader(); });
+
+    function openArticle(id){
+      const a = ARTICLES.find(x=>x.id===id);
+      if(!a) return;
+      readerContent.innerHTML = ''
+        + '<h1>'+a.title+'</h1>'
+        + '<div class="meta">'+a.author+' • '+a.category.toUpperCase()+'</div>'
+        + '<img src="'+a.img+'" alt="'+a.title+'" style="width:100%;height:auto;margin:18px 0;border-radius:6px">'
+        + '<p>'+a.body+'</p>'
+        + '<div style="margin-top:14px;display:flex;gap:8px">'
+        +   '<button id="reader-share">Copy link</button>'
+        +   '<button id="reader-open">Open original</button>'
+        + '</div>';
+      reader.classList.add('show');
+      reader.setAttribute('aria-hidden','false');
+      document.getElementById('reader-share').addEventListener('click',()=>{
+        const url = window.location.href.split('#')[0] + '#article=' + a.id;
+        navigator.clipboard?.writeText(url).then(()=>alert('Link copied to clipboard'));
+      });
+      document.getElementById('reader-open').addEventListener('click',()=>{ alert('This is a static demo — original article not available.'); });
+      history.replaceState(null,'', '#article=' + a.id);
+    }
+    function closeReader(){
+      reader.classList.remove('show');
+      reader.setAttribute('aria-hidden','true');
+      history.replaceState(null,'',' ');
+    }
+
+    window.addEventListener('load', ()=>{
+      const h = location.hash;
+      if(h && h.startsWith('#article=')){
+        const id = Number(h.split('=')[1]);
+        if(Number.isFinite(id)) openArticle(id);
+      }
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link=>{
+      link.addEventListener('click',e=>{
+        e.preventDefault();
+        const key = link.dataset.link;
+        if(key==='front') window.scrollTo({top:0,behavior:'smooth'});
+        else if(key==='features') document.getElementById('hero-hero').scrollIntoView({behavior:'smooth'});
+        else if(key==='opinion'){ setActiveCategory('opinion'); }
+      });
+    });
+
+    document.getElementById('side-subscribe').addEventListener('submit',e=>{
+      e.preventDefault();
+      const email = document.getElementById('sub-email').value;
+      if(!email) return alert('Please enter email');
+      alert('Thanks! ' + email + ' is added to demo subscription list (static site).');
+      document.getElementById('sub-email').value='';
+    });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
