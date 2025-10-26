@@ -463,14 +463,15 @@
     });
 
     document.querySelectorAll('.nav-link').forEach(link=>{
-      link.addEventListener('click',e=>{
-        e.preventDefault();
-        const key = link.dataset.link;
-        if(key==='front') window.scrollTo({top:0,behavior:'smooth'});
-        else if(key==='features') document.getElementById('hero-hero').scrollIntoView({behavior:'smooth'});
-        else if(key==='opinion'){ setActiveCategory('opinion'); }
-      });
-    });
+  link.addEventListener('click', e=>{
+    const key = link.dataset.link;
+    if(!key) return; // allow normal links
+    e.preventDefault();
+    if(key==='front') window.scrollTo({top:0, behavior:'smooth'});
+    else if(key==='features') document.getElementById('hero-hero').scrollIntoView({behavior:'smooth'});
+    else if(key==='opinion') setActiveCategory('opinion');
+  });
+});
 
     document.getElementById('side-subscribe').addEventListener('submit',e=>{
       e.preventDefault();
@@ -664,5 +665,6 @@ document.getElementById("newsletter-form").addEventListener("submit", function(e
 </script>
 </body>
 </html>
+
 
 
