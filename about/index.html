@@ -1,509 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - The Unicorner Times</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — The Unicorner Times</title>
+  <link rel="icon" href="logo.png" />
   <style>
-    /* --- General Styles --- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: "Arial", sans-serif;
-      background: #fff;
-      color: #222;
-      overflow-x: hidden;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
+    /* ——— BASE STYLES ——— */
+    :root {
+      --font-serif: "Playfair Display", Georgia, serif;
+      --font-body: "Georgia", "Times New Roman", serif;
+      --color-bg: #fff;
+      --color-text: #111;
+      --color-accent: #222;
+      --color-muted: #666;
     }
 
-    /* --- Navbar --- */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 20px;
-      border-bottom: 1px solid #eee;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+    }
+
+    /* ——— HEADER & NAV ——— */
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background: #fafafa;
+      border-bottom: 1px solid #ddd;
+    }
+
+    header h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      color: #555;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    nav {
+      background: #fff;
+      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
       position: sticky;
       top: 0;
-      background: #fff;
-      z-index: 1000;
-    }
-    .logo {
-      font-family: "Brush Script MT", cursive;
-      font-size: 28px;
-      font-weight: bold;
-      color: #333;
-    }
-    .nav-right {
-      display: flex;
-      gap: 20px;
-    }
-    .nav-right a {
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-    .nav-right a:hover {
-      color: #ff6600;
+      z-index: 20;
+      padding: 12px 0;
     }
 
-    /* Hamburger button */
-    .menu-btn {
+    nav a {
+      color: #111;
+      margin: 0 16px;
+      text-decoration: none;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: opacity 0.2s ease;
+    }
+
+    nav a:hover { opacity: 0.6; }
+
+    /* ——— MOBILE MENU ——— */
+    .hamburger {
+      display: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 0 20px;
+    }
+
+    .mobile-menu {
       display: none;
       flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-    }
-    .menu-btn span {
-      width: 25px;
-      height: 3px;
-      background: #333;
-      border-radius: 2px;
-      transition: 0.3s;
+      background: #fff;
+      border-top: 1px solid #ddd;
     }
 
-    /* Mobile menu as sidebar */
-    @media (max-width: 768px) {
-      .menu-btn {
-        display: flex;
-      }
-      .nav-right {
-        position: fixed;
-        top: 0;
-        left: -250px; /* hidden by default */
-        width: 200px;
-        height: 100%;
-        background: #fff;
-        box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-        flex-direction: column;
-        padding: 60px 20px;
-        transition: left 0.3s ease;
-        z-index: 999;
-      }
-      .nav-right.show {
-        left: 0; /* slide in */
-      }
-      .nav-right a {
-        margin: 10px 0;
-        font-size: 1.1rem;
-      }
+    .mobile-menu a {
+      padding: 12px 20px;
+      border-bottom: 1px solid #eee;
+      color: #111;
+      text-align: left;
     }
 
-    /* --- Hero --- */
+    .mobile-menu a:hover { background: #f7f7f7; }
+
+    /* ——— HERO ——— */
     .hero {
-      text-align: center;
-      padding: 70px 20px;
-      animation: fadeIn 1.2s ease-in-out;
-    }
-    .hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      color: #555;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* --- About Sections --- */
-    .section {
-      max-width: 1000px;
-      margin: 50px auto;
-      padding: 20px;
+      position: relative;
+      height: 60vh;
+      background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
       display: flex;
-      flex-wrap: wrap;
+      justify-content: center;
       align-items: center;
-      gap: 30px;
-    }
-    .section img {
-      flex: 1 1 300px;
-      max-width: 400px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
-    }
-    .section-content {
-      flex: 1 1 400px;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s ease;
-    }
-    .section-content h2 {
-      margin-bottom: 10px;
-      font-size: 1.8rem;
-    }
-    .section-content p {
-      color: #555;
-      line-height: 1.6;
-    }
-    .visible {
-      opacity: 1 !important;
-      transform: translateY(0) !important;
-    }
-
-    /* --- Footer --- */
-    footer {
       text-align: center;
-      padding: 20px;
+      color: #fff;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+    }
+
+    .hero h2 {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-family: var(--font-serif);
+      max-width: 700px;
+      padding: 0 20px;
+      animation: fadeInUp 1.2s ease both;
+    }
+
+    /* ——— CONTENT ——— */
+    .about-section {
+      max-width: 950px;
+      margin: 80px auto;
+      padding: 0 20px;
+      animation: fadeIn 1s ease both;
+    }
+
+    .about-section h2 {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .about-section p {
+      font-size: 1.05rem;
+      color: #333;
+      text-align: justify;
+      margin-bottom: 1.5rem;
+    }
+
+    blockquote {
+      font-style: italic;
+      font-size: 1.3rem;
+      border-left: 3px solid #111;
+      padding-left: 16px;
+      margin: 2.5rem 0;
+      color: #555;
+    }
+
+    /* ——— TEAM ——— */
+    .team {
+      border-top: 1px solid #ddd;
+      margin-top: 80px;
+      padding-top: 40px;
+    }
+
+    .team h3 {
+      font-size: 1.8rem;
+      text-align: center;
+      font-family: var(--font-serif);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .member {
+      text-align: center;
       background: #fafafa;
-      font-size: 0.9rem;
-      color: #777;
-      margin-top: 50px;
+      border-radius: 12px;
+      padding: 25px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInUp 1s ease both;
     }
 
-    /* --- Animations --- */
+    .member:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    }
+
+    .member img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ddd;
+      margin-bottom: 15px;
+      transition: transform 0.4s;
+    }
+
+    .member:hover img { transform: scale(1.05); }
+
+    /* ——— GALLERY ——— */
+    .gallery {
+      text-align: center;
+      margin: 100px auto;
+    }
+
+    .gallery h3 {
+      font-family: var(--font-serif);
+      font-size: 1.7rem;
+      margin-bottom: 20px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 15px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      animation: fadeIn 1s ease both;
+    }
+
+    .gallery-grid img:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
+    }
+
+    /* ——— PARTNERS ——— */
+    .partners {
+      margin: 80px auto;
+      text-align: center;
+      max-width: 1000px;
+    }
+
+    .partners h3 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+
+    .partner-carousel {
+      overflow: hidden;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      background: #fdfdfd;
+      padding: 15px 0;
+    }
+
+    .partner-logos {
+      display: flex;
+      gap: 50px;
+      animation: scroll 30s linear infinite alternate;
+      width: max-content;
+    }
+
+    .partner-logos img {
+      height: 45px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
+    }
+
+    .partner-logos:hover { animation-play-state: paused; }
+    .partner-logos img:hover { opacity: 1; }
+
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ——— FOOTER ——— */
+    footer {
+      background: #111;
+      color: #eee;
+      margin-top: 100px;
+      padding: 60px 20px 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto 50px;
+    }
+
+    .footer-column h4 {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .footer-column a {
+      display: block;
+      color: #bbb;
+      text-decoration: none;
+      margin: 6px 0;
+    }
+
+    .footer-column a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #333;
+      padding-top: 20px;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+
+    /* ——— ANIMATIONS ——— */
     @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-    /* Team Members */
-#team {
-  padding: 50px 0;
-  text-align: center;
-  background: #f4f4f4;
-}
-
-#team h2 {
-  font-size: 32px;
-  margin-bottom: 30px;
-}
-
-.carousel {
-  position: relative;
-  max-width: 400px;
-  margin: auto;
-}
-
-.slides {
-  display: flex;
-  overflow: hidden;
-}
-
-.member {
-  min-width: 100%;
-  transition: 0.5s;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.member img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  margin-bottom: 15px;
-}
-
-/* Tugmalar */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 40%;
-  padding: 16px;
-  color: #333;
-  font-size: 24px;
-  font-weight: bold;
-  border-radius: 50%;
-  background: #ddd;
-}
-
-.next { right: -50px; }
-.prev { left: -50px; }
-
-.prev:hover, .next:hover {
-  background: #666;
-  color: white;
-}
-
-/* Nuqtalar */
-.dots {
-  text-align: center;
-  margin-top: 15px;
-}
-.dot {
-  height: 12px;
-  width: 12px;
-  margin: 0 5px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-}
-.active {
-  background-color: #333;
-}
-
-
-
-
-
-
-
-    .partners-marquee {
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.marquee-track {
-  display: inline-flex;
-  gap: 80px;
-  align-items: center;
-  animation: marquee 30s linear infinite;
-}
-
-.marquee-track img {
-  height: 100px; /* logolar balandligi */
-  width: auto;
-  object-fit: contain;
-  filter: grayscale(0%);
-  transition: transform 0.3s ease;
-}
-
-.marquee-track img:hover {
-  transform: scale(1.15);
-}
-
-/* cheksiz oqishi */
-@keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-    h3 a:hover {
-  text-decoration: underline;
-  color: #000;
-  transition: color 0.2s ease;
-}
+    /* ——— RESPONSIVE ——— */
+    @media (max-width: 768px) {
+      .hamburger { display: block; }
+      nav a { display: none; }
+      .mobile-menu.show { display: flex; }
+      .hero { height: 45vh; }
+      .member img { width: 140px; height: 140px; }
+    }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <a href="/" class="logo">The Unicorner Times</a>
-    <div class="menu-btn" id="menu-btn">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-    <div class="nav-right" id="nav-links">
-      <a href="https://unicorner.uz">Home</a>
-      <a href="https://book.unicorner.uz">Books</a>
-      <a href="https://research.unicorner.uz">Research</a>
-      <a href="https://article.unicorner.uz">Articles</a>
-      <a href="https://unicorner.uz/publish">Publish</a>
+  <header>
+    <h1>The Unicorner Times</h1>
+    <p>Where Young Minds Meet Global Perspectives</p>
+  </header>
+
+  <nav>
+    <span class="hamburger" id="hamburger">☰</span>
+    <a href="https://unicorner.uz">Home</a>
+    <a href="https://unicorner.uz/about"><strong>About</strong></a>
+    <a href="https://book.unicorner.uz">Books</a>
+    <a href="https://research.unicorner.uz">Research</a>
+    <a href="https://blog.unicorner.uz">Blog</a>
+    <a href="https://article.unicorner.uz">Articles</a>
+    <a href="https://live.unicorner.uz">Live</a>
+    <a href="https://unicorner.uz/publish">Contact</a>
+    <div class="mobile-menu" id="mobileMenu">
+    <a href="https://unicorner.uz">Home</a>
+    <a href="https://unicorner.uz/about"><strong>About</strong></a>
+    <a href="https://book.unicorner.uz">Books</a>
+    <a href="https://research.unicorner.uz">Research</a>
+    <a href="https://blog.unicorner.uz">Blog</a>
+    <a href="https://article.unicorner.uz">Articles</a>
+    <a href="https://live.unicorner.uz">Live</a>
+    <a href="https://unicorner.uz/publish">Contact</a>
     </div>
   </nav>
 
-  <!-- Hero -->
   <section class="hero">
-    <h1>About The Unicorner Times</h1>
-    <p>We are an open-source platform for sharing research, articles, and creative works. Our mission is to empower voices and ideas through accessible publishing.</p>
+    <h2>Behind Every Story — A Team That Believes in Thoughtful Journalism</h2>
   </section>
 
-  <!-- Sections -->
-  <section class="section">
-    <img src="pics/community.jpg" alt="Community">
-    <div class="section-content">
-      <h2>Our Community</h2>
-      <p>We believe in the power of collaboration. The Unicorner Times is built by students, researchers, and writers across the globe who contribute knowledge and creativity.</p>
-    </div>
-  </section>
+  <main class="about-section">
+    <h2>About The Unicorner Times</h2>
+    <p>The Unicorner Times is a student-driven digital journal dedicated to exploring the forces that shape our future — from economics and technology to culture and politics.</p>
+    <blockquote>“We believe that journalism should not only inform — it should illuminate.”</blockquote>
+    <p>Inspired by publications like <em>The New York Times</em> and <em>The New Yorker</em>, The Unicorner Times blends investigative depth with literary style.</p>
 
-  <section class="section">
-    <div class="section-content">
-      <h2>Our Mission</h2>
-      <p>Our mission is to provide a free and accessible platform for sharing ideas, research, and stories. We aim to democratize access to information and empower creators everywhere.</p>
-    </div>
-    <img src="pics/mission.jpg" alt="Mission">
-  </section>
-
-  <section class="section">
-    <img src="pics/innovation.jpg" alt="Innovation">
-    <div class="section-content">
-      <h2>Innovation & Growth</h2>
-      <p>We embrace technology to make publishing seamless and engaging. With advanced tools, animations, and modern UI, we bring ideas to life in a user-friendly way.</p>
-    </div>
-  </section>
-
-
-  <!-- Team Members -->
-  <section id="team">
-    <h2>Our Team</h2>
-
-    <div class="carousel">
-
-      <div class="slides">
+    <!-- TEAM -->
+    <div class="team">
+      <h3>Editorial Team</h3>
+      <div class="team-grid">
         <div class="member">
-          <img src="pics/abu2.PNG" alt="Member 1">
-          <h3>
-  <a href="https://unicorner.uz/coo" style="color: inherit; text-decoration: none;">
-    Abduqodirjon Bakhromov
-  </a>
-</h3>
-          <p>Co-Author @ UGS Tashkent</p>
+          <img src="pics/abu2.PNG" alt="">
+          <h4>Abduqodir Bakhromov</h4><p>Author & Chief Operating Officer</p>
         </div>
-
         <div class="member">
-          <img src="pics/member0.jpg" alt="Member 2">
-          <h3>Mustafaeva Durdona</h3>
-          <p>Executive Author</p>
+          <img src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=500&q=80" alt="">
+          <h4>Sarvinoz A.</h4><p>Managing Editor</p>
         </div>
-
         <div class="member">
-          <img src="pics/member0.jpg" alt="Member 3">
-          <h3>Mushtariy Anvarova</h3>
-          <p>Author & NisoUz</p>
+          <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=500&q=80" alt="">
+          <h4>Kamron S.</h4><p>Design & Multimedia Lead</p>
+        </div>
+        <div class="member">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=500&q=80" alt="">
+          <h4>Editorial Contributors</h4><p>Writers from across Uzbekistan and beyond</p>
         </div>
       </div>
+    </div>
 
-      <!-- Tugmalar -->
-      <a class="prev">&#10094;</a>
-      <a class="next">&#10095;</a>
-
-      <!-- Nuqtalar -->
-      <div class="dots">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
+    <!-- GALLERY -->
+    <div class="gallery">
+      <h3>Moments from Our Journey</h3>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1494172961521-33799ddd43a5?auto=format&fit=crop&w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80">
+        <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=800&q=80">
       </div>
     </div>
-  </section>
 
-<!-- Partners -->
-<section id="partners" style="padding:50px 0;background:#fff;">
-  <div class="partners-marquee">
-    <div class="marquee-track">
-      <a href="https://t.me/aponomics" target="_blank"><img src="partners/partner1.png" alt="Partner 1"></a>
-      <a href="https://t.me/fincost" target="_blank"><img src="partners/partner2.jpg" alt="Partner 2"></a>
-      <a href="https://gov.uz/oz/yoshlar" target="_blank"><img src="partners/partner002.png" alt="Partner 0"></a>
-      <a href="https://cd-exam.com" target="_blank"><img src="partners/partner3.jpg" alt="Partner 3"></a>
-      <a href="https://t.me/unicorner_ac" target="_blank"><img src="partners/partner4.jpg" alt="Partner 4"></a>
-      <a href="https://fincost.ai" target="_blank"><img src="partners/partnerfinrdlab.png" alt="Partner 5"></a>
-      <a href="https://uzgeouniver.uz" target="_blank"><img src="partners/partner6.png" alt="Partner 6"></a>
-      <a href="https://t.me/nisouzz" target="_blank"><img src="partners/partner07.png" alt="Partner 7"></a>
-      <a href="https://t.me/shahrisabzshaharixtisoslashganmk" target="_blank"><img src="partners/partner8.png" alt="Partner 8"></a>
-
-      <a href="https://t.me/aponomics" target="_blank"><img src="partners/partner1.png" alt="Partner 1"></a>
-      <a href="https://t.me/fincost" target="_blank"><img src="partners/partner2.jpg" alt="Partner 2"></a>
-      <a href="https://gov.uz/oz/yoshlar" target="_blank"><img src="partners/partner002.png" alt="Partner 0"></a>
-      <a href="https://cd-exam.com" target="_blank"><img src="partners/partner3.jpg" alt="Partner 3"></a>
-      <a href="https://t.me/unicorner_ac" target="_blank"><img src="partners/partner4.jpg" alt="Partner 4"></a>
-      <a href="https://fincost.ai" target="_blank"><img src="partners/partnerfinrdlab.png" alt="Partner 5"></a>
-      <a href="https://uzgeouniver.uz" target="_blank"><img src="partners/partner6.png" alt="Partner 6"></a>
-      <a href="https://t.me/nisouzz" target="_blank"><img src="partners/partner07.png" alt="Partner 7"></a>
-      <a href="https://t.me/shahrisabzshaharixtisoslashganmk" target="_blank"><img src="partners/partner8.png" alt="Partner 8"></a>
-
-      <a href="https://t.me/aponomics" target="_blank"><img src="partners/partner1.png" alt="Partner 1"></a>
-      <a href="https://t.me/fincost" target="_blank"><img src="partners/partner2.jpg" alt="Partner 2"></a>
-      <a href="https://gov.uz/oz/yoshlar" target="_blank"><img src="partners/partner002.png" alt="Partner 0"></a>
-      <a href="https://cd-exam.com" target="_blank"><img src="partners/partner3.jpg" alt="Partner 3"></a>
-      <a href="https://t.me/unicorner_ac" target="_blank"><img src="partners/partner4.jpg" alt="Partner 4"></a>
-      <a href="https://fincost.ai" target="_blank"><img src="partners/partnerfinrdlab.png" alt="Partner 5"></a>
-      <a href="https://uzgeouniver.uz" target="_blank"><img src="partners/partner6.png" alt="Partner 6"></a>
-      <a href="https://t.me/nisouzz" target="_blank"><img src="partners/partner07.png" alt="Partner 7"></a>
-      <a href="https://t.me/shahrisabzshaharixtisoslashganmk" target="_blank"><img src="partners/partner8.png" alt="Partner 8"></a>
+    <!-- PARTNERS -->
+    <div class="partners">
+      <h3>Our Global Partners</h3>
+      <div class="partner-carousel">
+        <div class="partner-logos">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/BBC_News_2022_%28Alt%29.svg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/The_New_York_Times_logo.svg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Reuters_Logo.svg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/The_New_Yorker_logo.svg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Al_Jazeera_English_logo.svg">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/The_Guardian_2018.svg">
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </main>
 
-
-  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 The Unicorner Times. All rights reserved.</p>
+    <div class="footer-grid">
+      <div class="footer-column"><h4>Sections</h4><a href="#">World</a><a href="#">Economy</a><a href="#">Culture</a><a href="#">Technology</a></div>
+      <div class="footer-column"><h4>About</h4><a href="about.html">Our Story</a><a href="#">Team</a><a href="#">Partners</a><a href="#">Policy</a></div>
+      <div class="footer-column"><h4>Connect</h4><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">YouTube</a><a href="#">Email</a></div>
+      <div class="footer-column"><h4>Join Us</h4><a href="#">Submit a Story</a><a href="#">Internships</a><a href="#">Collaborate</a></div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 The Unicorner Times — Crafted with purpose in Uzbekistan.
+    </div>
   </footer>
 
   <script>
     // Mobile menu toggle
-    const menuBtn = document.getElementById("menu-btn");
-    const navLinks = document.getElementById("nav-links");
-    menuBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("show");
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('show');
     });
-
-    // Scroll animations
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-        }
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll(".section img, .section-content").forEach(el => observer.observe(el));
-
-
-    // Team Members Carousel
-let slideIndex = 0;
-let slides = document.querySelectorAll(".member");
-let dots = document.querySelectorAll(".dot");
-showSlides(slideIndex);
-
-// Chap / o‘ng tugmalar
-document.querySelector(".prev").onclick = () => showSlides(slideIndex -= 1);
-document.querySelector(".next").onclick = () => showSlides(slideIndex += 1);
-
-// Hozirgi slayd
-function currentSlide(n) {
-  showSlides(slideIndex = n-1);
-}
-
-// Slaydlarni ko‘rsatish
-function showSlides(n) {
-  if (n >= slides.length) {slideIndex = 0}
-  if (n < 0) {slideIndex = slides.length - 1}
-
-  slides.forEach((slide) => slide.style.display = "none");
-  dots.forEach((dot) => dot.classList.remove("active"));
-
-  slides[slideIndex].style.display = "block";
-  dots[slideIndex].classList.add("active");
-}
-
-// Avtomatik slayd
-setInterval(() => {
-  showSlides(slideIndex += 1);
-}, 5000);
-
-
-
-
-    // Logolarni cheksiz oqishi uchun dublikat qilish
-  const logos = document.querySelector(".logos");
-  logos.innerHTML += logos.innerHTML; 
-
-    // disable right-click and image dragging
-document.addEventListener('contextmenu', event => event.preventDefault());
-document.addEventListener('dragstart', event => event.preventDefault());
-
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
