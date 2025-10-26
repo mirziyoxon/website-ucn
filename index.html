@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>The Unicorner Times — Hybrid NYT / The Guardian / New Yorker</title>
   <meta name="description" content="Unicorner Times — a hybrid layout inspired by NYT, The Guardian and The New Yorker. Fully working search, featured, categories and article reader (static).">
-
+<script>
+  // Redirect mobile and tablet users to another website
+  if (/Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)) {
+    window.location.href = "https://m.unicorner.uz"; // 🔁 change this URL
+  }
+</script>
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -472,5 +477,188 @@
       document.getElementById('sub-email').value='';
     });
   </script>
+  <!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h2 class="footer-logo">Unicorner Times</h2>
+      <p class="footer-desc">Exploring ideas that shape the intersection of economics, design, and innovation.</p>
+      <p class="footer-location">📍 Tashkent, Uzbekistan</p>
+    </div>
+
+    <div class="footer-column">
+      <h3>Explore</h3>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Authors</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Topics</h3>
+      <ul>
+        <li><a href="#">Business</a></li>
+        <li><a href="#">Design</a></li>
+        <li><a href="#">Innovation</a></li>
+        <li><a href="#">Culture</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h3>Newsletter</h3>
+      <p>Stay updated with Unicorner’s weekly digest on startups and innovation.</p>
+      <form id="newsletter-form">
+        <input type="email" id="newsletter-email" placeholder="Enter your email" required>
+        <button type="submit">Subscribe</button>
+      </form>
+      <p id="thankyou-msg" class="thankyou-msg"></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Unicorner Media. Built with purpose in Uzbekistan. All rights reserved.</p>
+    <div class="footer-socials">
+      <a href="https://t.me/unicorner_times" target="_blank">Telegram</a> ·
+      <a href="https://linkedin.com" target="_blank">LinkedIn</a> ·
+      <a href="https://github.com" target="_blank">GitHub</a> ·
+      <a href="https://x.com" target="_blank">X</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== FOOTER STYLES ===================== -->
+<style>
+.site-footer {
+  border-top: 1px solid #ddd;
+  background: #fff;
+  color: #222;
+  padding: 60px 20px 30px;
+  font-family: "Georgia", serif;
+}
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto 40px;
+}
+.footer-logo {
+  font-family: "Times New Roman", serif;
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+.footer-desc {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.footer-location {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 0.8rem;
+}
+.footer-column h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px solid #ddd;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-column ul li {
+  margin: 6px 0;
+}
+.footer-column ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+.footer-column ul li a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+.footer-column form {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.footer-column input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+.footer-column button {
+  background: #111;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.footer-column button:hover {
+  background: #333;
+}
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  font-size: 0.9rem;
+  color: #555;
+}
+.footer-socials {
+  margin-top: 8px;
+}
+.footer-socials a {
+  color: #444;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+.footer-socials a:hover {
+  color: #000;
+}
+.thankyou-msg {
+  color: green;
+  font-size: 0.9rem;
+  margin-top: 8px;
+  display: none;
+}
+@media (max-width: 700px) {
+  .footer-column form {
+    flex-direction: column;
+  }
+  .footer-column button {
+    width: 100%;
+  }
+}
+</style>
+
+<!-- ===================== FOOTER SCRIPT ===================== -->
+<script>
+document.getElementById("newsletter-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const emailInput = document.getElementById("newsletter-email");
+  const msg = document.getElementById("thankyou-msg");
+  const email = emailInput.value.trim();
+
+  if (email) {
+    let subscribers = JSON.parse(localStorage.getItem("unicorner_subscribers")) || [];
+    subscribers.push(email);
+    localStorage.setItem("unicorner_subscribers", JSON.stringify(subscribers));
+    msg.textContent = "✅ Thank you for subscribing!";
+    msg.style.display = "block";
+    emailInput.value = "";
+  }
+});
+</script>
 </body>
 </html>
+
