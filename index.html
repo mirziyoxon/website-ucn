@@ -232,10 +232,21 @@
 </header>
 
 <!-- Profile Info Box -->
+<!-- Profile Info Box -->
 <div id="profile-info" class="profile-info">
   <h3>Your Info</h3>
   <p><strong>Name:</strong> <span id="userName"></span></p>
   <p><strong>Email:</strong> <span id="userEmail"></span></p>
+  <button id="logout-btn" style="
+    background: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 8px;
+    width: 100%;
+  ">Log out</button>
 </div>
   <header class="masthead">
     <div class="mast-inner">
@@ -821,9 +832,16 @@ document.getElementById("newsletter-form").addEventListener("submit", function(e
   profileIcon.addEventListener('click', () => {
     profileInfo.style.display = profileInfo.style.display === 'block' ? 'none' : 'block';
   });
+  // 🔹 Log out button
+document.getElementById('logout-btn').addEventListener('click', () => {
+  localStorage.removeItem('user');  // remove saved user data
+  profileInfo.style.display = 'none'; // hide profile box
+  popup.style.display = 'flex'; // show signup popup again
+});
 </script>
 </body>
 </html>
+
 
 
 
