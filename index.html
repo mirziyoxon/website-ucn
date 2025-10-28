@@ -10,6 +10,16 @@
     }
   });
 </script>
+  <script>
+  // Auto cache bust every 24 hours
+  const version = new Date().toISOString().slice(0, 10);
+  document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(tag => {
+    const attr = tag.tagName === 'LINK' ? 'href' : 'src';
+    const url = new URL(tag[attr], window.location.origin);
+    url.searchParams.set('v', version);
+    tag[attr] = url.toString();
+  });
+</script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>The Unicorner Times</title>
@@ -668,6 +678,7 @@ document.getElementById("newsletter-form").addEventListener("submit", function(e
 </script>
 </body>
 </html>
+
 
 
 
