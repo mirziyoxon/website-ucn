@@ -236,15 +236,23 @@
       });
     }
 
-    // 🔹 Detect country from IP (for phone)
-    fetch("https://ipapi.co/json/")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("phone").value = data.country_calling_code + " (" + data.country_name + ")";
-      })
-      .catch(() => {
-        document.getElementById("phone").value = "+000 (Unknown)";
-      });
+    // 🔹 Detect country calling code for phone input (auto prefix)
+const phoneInput = document.getElementById("phone");
+
+fetch("https://ipapi.co/json/")
+  .then(res => res.json())
+  .then(data => {
+    const code = data.country_calling_code || "+000";
+    const country = data.country_name || "Unknown";
+    phoneInput.value = code + " "; // foydalanuvchi shu yerga raqam yozadi
+    phoneInput.placeholder = code + " your number";
+    phoneInput.removeAttribute("readonly");
+  })
+  .catch(() => {
+    phoneInput.value = "+000 ";
+    phoneInput.placeholder = "+000 your number";
+    phoneInput.removeAttribute("readonly");
+  });
 
     // 🔹 Send form via EmailJS
     form.addEventListener("submit", async (e) => {
@@ -279,4 +287,5 @@
 
 </body>
 </html>
+
 
