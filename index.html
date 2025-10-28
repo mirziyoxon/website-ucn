@@ -140,10 +140,103 @@
       .card .thumb{width:100%;height:160px}
       .reader-inner{padding:18px}
     }
+
+
+    /* Popup */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+.popup-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+  text-align: center;
+  max-width: 350px;
+  width: 90%;
+}
+.popup-content h2 {
+  color: #007bff;
+}
+.popup-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+.popup-content button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.popup-content button:hover {
+  background: #0056b3;
+}
+
+/* Profile icon */
+.profile-icon {
+  position: fixed;
+  top: 20px;
+  right: 25px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* Profile info box */
+.profile-info {
+  display: none;
+  position: fixed;
+  top: 60px;
+  right: 25px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  width: 220px;
+}
   </style>
 </head>
 <body>
+<!-- Popup (Sign Up Modal) -->
+<div id="signup-popup" class="popup">
+  <div class="popup-content">
+    <h2>Join Us 🎉</h2>
+    <p>Sign up to become part of our community</p>
+    <form id="signup-form">
+      <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+      <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+      <input type="email" id="email" name="email" placeholder="Email Address" required>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</div>
 
+<!-- Header Profile Icon -->
+<header>
+  <div id="profile-icon" class="profile-icon" title="Your Info">
+    👤
+  </div>
+</header>
+
+<!-- Profile Info Box -->
+<div id="profile-info" class="profile-info">
+  <h3>Your Info</h3>
+  <p><strong>Name:</strong> <span id="userName"></span></p>
+  <p><strong>Email:</strong> <span id="userEmail"></span></p>
+</div>
   <header class="masthead">
     <div class="mast-inner">
       <div style="display:flex;align-items:center;gap:10px">
@@ -255,7 +348,7 @@
       </div>
     </div>
   </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script>
     // 12 demo articles
     const ARTICLES = [
@@ -675,9 +768,63 @@ document.getElementById("newsletter-form").addEventListener("submit", function(e
     emailInput.value = "";
   }
 });
+
+  // 🔑 YOUR KEYS
+  const PUBLIC_KEY = "jc2imD9DTsfY_I-bf";
+  const SERVICE_ID = "service_1ysxz3b";
+  const TEMPLATE_ID = "service_1ysxz3b";
+
+  emailjs.init(PUBLIC_KEY);
+
+  const popup = document.getElementById('signup-popup');
+  const form = document.getElementById('signup-form');
+  const profileIcon = document.getElementById('profile-icon');
+  const profileInfo = document.getElementById('profile-info');
+
+  // 🔹 Popup birinchi ochilganda chiqadi (faqat foydalanuvchi hali sign up qilmagan bo‘lsa)
+  window.addEventListener('load', () => {
+    const savedUser = localStorage.getItem('user');
+    if (!savedUser) popup.style.display = 'flex';
+    else showProfile(JSON.parse(savedUser));
+  });
+
+  // 🔹 Form yuborilganda
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const firstName = document.getElementById('firstName').value.trim();
+    const lastName = document.getElementById('lastName').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    // Email yuborish
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      name: firstName + " " + lastName,
+      email: email
+    }).then(() => {
+      alert("✅ Welcome email sent!");
+      const user = { firstName, lastName, email };
+      localStorage.setItem('user', JSON.stringify(user));
+      popup.style.display = 'none';
+      showProfile(user);
+    }, (error) => {
+      alert("❌ Error: " + JSON.stringify(error));
+    });
+  });
+
+  // 🔹 Profilni ko‘rsatish
+  function showProfile(user) {
+    document.getElementById('userName').textContent = user.firstName + " " + user.lastName;
+    document.getElementById('userEmail').textContent = user.email;
+  }
+
+  // 🔹 Profil icon bosilganda ma’lumotlarni ko‘rsatish / yopish
+  profileIcon.addEventListener('click', () => {
+    profileInfo.style.display = profileInfo.style.display === 'block' ? 'none' : 'block';
+  });
 </script>
 </body>
 </html>
+
 
 
 
