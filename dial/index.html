@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Publish — The Unicorner Times</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --accent:#0b3d91;
+      --muted:#6b7280;
+      --bg:#ffffff;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px;
+      min-height: 100vh;
+    }
+    nav {
+      width: 100%;
+      max-width: 720px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--accent);
+      font-family: 'Merriweather', serif;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .logo img {
+      height: 36px;
+      border-radius: 6px;
+    }
+    .home-btn {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    main {
+      width: 100%;
+      max-width: 720px;
+      padding: 20px 0 60px;
+    }
+    h1 {
+      font-family: 'Merriweather', serif;
+      font-size: 22px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    form {
+      background: #fff;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 12px;
+      margin-bottom: 6px;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      resize: vertical;
+    }
+    textarea { min-height: 80px; }
+    .auto-fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    button {
+      margin-top: 18px;
+      width: 100%;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .msg {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 14px;
+    }
+    footer {
+      margin-top: auto;
+      padding: 30px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="https://unicorner.uz" class="logo">
+      <img src="https://unicorner.uz/publish/logo.jpg" alt="Unicorner Logo">
+      The Unicorner Times
+    </a>
+    <a href="index.html" class="home-btn">Home</a>
+  </nav>
+
+  <main>
+    <h1>Submit for Publication</h1>
+
+    <form id="publish-form">
+      <label for="fullname">Full Name</label>
+      <input type="text" id="fullname" name="fullname" required placeholder="Your full name" />
+
+      <div class="auto-fields">
+        <div>
+          <label for="location">Location</label>
+          <input type="text" id="location" name="location" readonly />
+        </div>
+        <div>
+          <label for="country">Country</label>
+          <input type="text" id="country" name="country" readonly />
+        </div>
+      </div>
+
+      <div class="auto-fields">
+        <div>
+          <label for="date">Date</label>
+          <input type="text" id="date" name="date" readonly />
+        </div>
+        <div>
+          <label for="time">Time</label>
+          <input type="text" id="time" name="time" readonly />
+        </div>
+      </div>
+
+      <label for="type">Publication Type</label>
+      <select id="type" name="type" required>
+        <option value="">Select type</option>
+        <option value="Article">Article</option>
+        <option value="Research Paper">Research Paper</option>
+        <option value="News">News</option>
+      </select>
+
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" name="phone" readonly />
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required placeholder="you@example.com" />
+
+      <div class="checkbox">
+        <input type="checkbox" id="consent" />
+        <label for="consent">I agree to receive confirmation email</label>
+      </div>
+
+      <button id="submit-btn" type="submit" disabled>Submit</button>
+
+      <div class="msg" id="msg"></div>
+    </form>
+  </main>
+
+  <footer>
+    © 2025 Unicorner Media Group
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // 🔹 Initialize EmailJS
+    (function() {
+      emailjs.init({ publicKey: "jc2imD9DTsfY_I-bf" });
+    })();
+
+    const form = document.getElementById("publish-form");
+    const msg = document.getElementById("msg");
+    const submitBtn = document.getElementById("submit-btn");
+    const consent = document.getElementById("consent");
+
+    consent.addEventListener("change", () => {
+      submitBtn.disabled = !consent.checked;
+    });
+
+    // 🔹 Auto-fill date and time
+    const now = new Date();
+    document.getElementById("date").value = now.toLocaleDateString();
+    document.getElementById("time").value = now.toLocaleTimeString();
+
+    // 🔹 Detect location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        const { latitude, longitude } = pos.coords;
+        try {
+          const res = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
+          const data = await res.json();
+          document.getElementById("location").value = data.city || data.locality || "Unknown";
+          document.getElementById("country").value = data.countryName || "Unknown";
+        } catch {
+          document.getElementById("location").value = "Unknown";
+          document.getElementById("country").value = "Unknown";
+        }
+      }, () => {
+        document.getElementById("location").value = "Location blocked";
+        document.getElementById("country").value = "Unknown";
+      });
+    }
+
+   // 🔹 Detect country calling code for phone input (auto prefix)
+const phoneInput = document.getElementById("phone");
+
+fetch("https://ipapi.co/json/")
+  .then(res => res.json())
+  .then(data => {
+    const code = data.country_calling_code || "+000";
+    const country = data.country_name || "Unknown";
+    phoneInput.value = code + " "; // foydalanuvchi shu yerga raqam yozadi
+    phoneInput.placeholder = code + " your number";
+    phoneInput.removeAttribute("readonly");
+  })
+  .catch(() => {
+    phoneInput.value = "+000 ";
+    phoneInput.placeholder = "+000 your number";
+    phoneInput.removeAttribute("readonly");
+  });
+
+
+    // 🔹 Send form via EmailJS
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "Sending...";
+      msg.style.color = "#555";
+
+      const params = {
+        fullname: form.fullname.value,
+        location: form.location.value,
+        country: form.country.value,
+        date: form.date.value,
+        time: form.time.value,
+        type: form.type.value,
+        phone: form.phone.value,
+        email: form.email.value,
+      };
+
+      try {
+        await emailjs.send("service_j0gqa0b", "template_zdy4roo", params);
+        msg.textContent = "✅ Sent successfully! Check your email.";
+        msg.style.color = "green";
+        form.reset();
+        submitBtn.disabled = true;
+      } catch (error) {
+        console.error(error);
+        msg.textContent = "❌ Failed to send. Try again later.";
+        msg.style.color = "red";
+      }
+    });
+  </script>
+
+</body>
+</html>
