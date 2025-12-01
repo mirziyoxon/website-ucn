@@ -846,9 +846,28 @@ document.getElementById('logout-btn').addEventListener('click', () => {
   }
 
   protectPage();
+
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+  const supabase = createClient(
+    "https://alpesjeugegevlyoewut.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFscGVzamV1Z2VnZXZseW9ld3V0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ0MDgzMDMsImV4cCI6MjA3OTk4NDMwM30.4BSNKUMic7V7lwMhzFzUb_FXfcx5pgAOuI-zhN_Z2xs"
+  );
+
+  async function protectPage() {
+    const { data: { session } } = await supabase.auth.getSession();
+
+    // If no session → redirect to Auth website
+    if (!session) {
+      window.location.href = "https://authentication.unicorner.uz/login";
+    }
+  }
+
+  protectPage();
 </script>
 </body>
 </html>
+
 
 
 
