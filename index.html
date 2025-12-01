@@ -2,15 +2,6 @@
 <html lang="en">
 <head>
   <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    const isMobile = /android|avantgo|blackberry|iemobile|ipad|iphone|ipod|opera mini|mobile|windows phone/i.test(ua.toLowerCase());
-    if (isMobile) {
-      window.location.href = "https://m.unicorner.uz";
-    }
-  });
-</script>
-  <script>
   // Auto cache bust every 24 hours
   const version = new Date().toISOString().slice(0, 10);
   document.querySelectorAll('link[rel="stylesheet"], script[src]').forEach(tag => {
@@ -864,9 +855,23 @@ document.getElementById('logout-btn').addEventListener('click', () => {
   }
 
   protectPage();
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const version = new Date().toISOString().slice(0, 10);
+  document
+    .querySelectorAll('link[rel="stylesheet"], script[src]')
+    .forEach(tag => {
+      const attr = tag.tagName === 'LINK' ? 'href' : 'src';
+      const url = new URL(tag[attr], window.location.origin);
+      url.searchParams.set('v', version);
+      tag[attr] = url.toString();
+    });
+});
 </script>
 </body>
 </html>
+
 
 
 
