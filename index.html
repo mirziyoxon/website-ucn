@@ -836,9 +836,20 @@ document.getElementById('logout-btn').addEventListener('click', () => {
   profileInfo.style.display = 'none'; // hide profile box
   popup.style.display = 'flex'; // show signup popup again
 });
+
+  async function protectPage() {
+    const { data } = await supabase.auth.getUser();
+
+    if (!data.user) {
+      window.location.href = "https://authentication.unicorner.uz/login";
+    }
+  }
+
+  protectPage();
 </script>
 </body>
 </html>
+
 
 
 
