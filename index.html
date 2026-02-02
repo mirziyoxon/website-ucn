@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="en">
-<head>
+<head> <script>
+  if (/Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent)) {
+    window.location.href = "https://m.unicorner.uz";
+  }
+</script>
   <script>
   // Auto cache bust every 24 hours
   const version = new Date().toISOString().slice(0, 10);
@@ -871,6 +875,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
 
 
 
